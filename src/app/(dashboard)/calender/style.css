@@ -1,0 +1,57 @@
+.rbc-allday-cell {
+  display: none !important;
+}
+
+/* th  */
+.rbc-header {
+  padding: 30px;
+}
+
+/* td  */
+.rbc-timeslot-group {
+  /* padding: 50px 10px; */
+}
+
+.rbc-time-slot {
+  min-height: 100px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.rbc-time-slot .rbc-label {
+}
+.rbc-time-slot:nth-child(2) {
+  display: none;
+}
+/* event */
+.rbc-event,
+.rbc-event.rbc-selected {
+  background-color: transparent;
+  border: 0 !important;
+  outline: 0;
+}
+
+.rbc-event:focus {
+  outline: 0;
+}
+
+/* label in events */
+.rbc-event-label {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .rbc-header {
+    padding: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .rbc-time-view {
+    width: 1200px;
+  }
+}

@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export function LoginForm({
@@ -49,7 +48,6 @@ export function LoginForm({
         <Button type="submit" className="w-full" asChild>
           <Link href="/wizard">Sign in</Link>
         </Button>
-     
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

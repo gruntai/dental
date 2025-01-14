@@ -4,7 +4,6 @@ import { Card } from "./ui/card";
 import { Ellipsis } from "lucide-react";
 import { PanelRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
 
 function Sidebar({
   isOpened,

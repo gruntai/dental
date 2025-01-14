@@ -6,7 +6,7 @@ import Image from "next/image";
 
 function Navbar() {
   return (
-    <nav className="bg-white md:h-16 fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 py-3  border-b border-black">
+    <nav className="bg-white md:h-16 fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 py-3  shadow-md shadow-black/5">
       <Image
         src="/assets/images/logos/grunt_logo.png"
         alt="grunt logo"

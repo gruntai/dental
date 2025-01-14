@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +10,10 @@ export default {
   ],
   theme: {
     extend: {
+      transitionDuration: {
+        "1.5s": "1500ms",
+        "2s": "2000ms",
+      },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
@@ -55,12 +59,31 @@ export default {
           "5": "hsl(var(--chart-5))",
         },
       },
-      // borderRadius: {
-      // 	lg: 'var(--radius)',
-      // 	md: 'calc(var(--radius) - 2px)',
-      // 	sm: 'calc(var(--radius) - 4px)'
-      // }
+      keyframes: {
+        "pulse-ongoing": {
+          "0%": {
+            // transform: "scale(1)",
+            boxShadow: "0 0 0 0 var(--state-ongoing)",
+            opacity: "1",
+          },
+          "50%": {
+            // transform: "scale(1.1)",
+            // boxShadow: "0 0 0 10px var(--state-ongoing)",
+            boxShadow: "0 0 0 60px rgba(229, 62, 62, 0)",
+            opacity: "0.8",
+          },
+          "100%": {
+            // transform: "scale(0.9)",
+            opacity: "1",
+          },
+        },
+      },
+      animation: {
+        "pulse-ongoing": "pulse-ongoing 2s infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+};
+
+export default config;

@@ -10,10 +10,11 @@
 /* td  */
 .rbc-timeslot-group {
   /* padding: 50px 10px; */
+  align-items: center;
 }
 
 .rbc-time-slot {
-  min-height: 100px;
+  min-height: 150px;
   padding-left: 15px;
   padding-right: 15px;
   height: 100%;
@@ -23,9 +24,11 @@
 
 .rbc-time-slot .rbc-label {
 }
+
 .rbc-time-slot:nth-child(2) {
   display: none;
 }
+
 /* event */
 .rbc-event,
 .rbc-event.rbc-selected {
@@ -37,10 +40,40 @@
 .rbc-event:focus {
   outline: 0;
 }
+/* event container */
+.rbc-events-container {
+  margin-right: 0 !important;
+}
 
 /* label in events */
 .rbc-event-label {
   display: none;
+}
+
+.rbc-time-view {
+  width: 1800px;
+}
+
+.rbc-time-header.rbc-overflowing {
+  margin-right: 0 !important;
+}
+
+/* line */
+.rbc-current-time-indicator {
+}
+
+/* time column */
+.rbc-time-gutter.rbc-time-column {
+  width: 84.8125px;
+  min-width: 84.8125px;
+  max-width: 84.8125px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+/* today's active column */
+.rbc-today {
+  background: white !important;
 }
 
 @media (max-width: 768px) {
@@ -51,7 +84,4 @@
 }
 
 @media (max-width: 1280px) {
-  .rbc-time-view {
-    width: 1200px;
-  }
 }

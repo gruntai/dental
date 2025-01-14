@@ -5,7 +5,7 @@ import { Switch } from "./ui/switch";
 
 function Navbar() {
   return (
-    <nav className="md:h-16 flex flex-col-reverse md:flex-row items-start md:items-center gap-4 px-5 mb-10 md:mb-5 md:justify-end pt-5 md:pt-0">
+    <nav className="md:h-16 flex flex-col-reverse md:flex-row items-start md:items-center gap-4 px-5 mb-10 md:mb-5 md:justify-end pt-5 md:pt-0  border-b border-black">
       <span className="opacity-70">Last run: 5 Jun,14:53</span>
       <div className="flex flex-wrap gap-5 items-center">
         {/* dividor */}

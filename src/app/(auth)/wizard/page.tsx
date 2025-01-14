@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
@@ -86,66 +87,30 @@ const dentalSoftwareCompanies = [
     website: "https://www.dentimax.com",
     image: "/dm.avif",
   },
-  // {
-  //   name: "Carestream Dental",
-  //   website: "https://www.carestreamdental.com",
-  //   image: "/carestreamdental",
-  // },
-  // {
-  //   name: "Easy Dental",
-  //   website: "https://www.easydental.com",
-  //   image: "/easydental",
-  // },
   {
     name: "Dentrix",
     website: "https://www.dentrix.com",
     image: "/dentrix.avif",
   },
-  // {
-  //   name: "Mogo Cloud Dental Software",
-  //   website: "https://www.mogo.com",
-  //   image: "/mogoclouddentalsoftware",
-  // },
-  // {
-  //   name: "iDentalSoft",
-  //   website: "https://www.identalsoft.com",
-  //   image: "/identalsoft",
-  // },
-  // {
-  //   name: "Tab32",
-  //   website: "https://www.tab32.com",
-  //   image: "/tab32",
-  // },
-  // {
-  //   name: "Maxident",
-  //   website: "https://www.maxidentsoftware.com",
-  //   image: "/maxident",
-  // },
-  // {
-  //   name: "Dovetail",
-  //   website: "https://www.dovetaildentalsoftware.com",
-  //   image: "/dovetail",
-  // },
-  // {
-  //   name: "Umbie DentalCare",
-  //   website: "https://www.umbiedentalcare.com",
-  //   image: "/umbiedentalcare",
-  // },
 ];
 
 function Wizrd() {
+  const [showMore, setShowMore] = React.useState(false);
+  let companies = showMore
+    ? dentalSoftwareCompanies
+    : dentalSoftwareCompanies.slice(0, 8);
   return (
     <>
-      <div className="text-center mb-10">
-        <p className="text-2xl text-center mb-5 font-semibold">
-          Connect Your PMS
+      <div className="text-center -mt-14 2xl:mt-0 mb-10">
+        <p className="text-2xl text-center mb-2 font-semibold">
+          Connect Your Phone Provider
         </p>
         <p className="text-[#929799] text-xl">
-          What appointment booking system do you currently use?
+          What phone provider are you currently using?
         </p>
       </div>
 
-      <div className="mb-16">
+      <div className="mb-12">
         <p className="text-[#848687] font-bold text-center mb-3">
           Type to search or select from an option below
         </p>
@@ -157,9 +122,9 @@ function Wizrd() {
           />
         </div>
         <div className="flex flex-wrap">
-          {dentalSoftwareCompanies.map((bank) => (
+          {companies.map((bank) => (
             <Link
-              href={bank.website}
+              href={"/calender"}
               className="p-1 w-1/2 md:w-1/3 lg:w-1/4"
               key={bank.name}
             >
@@ -182,13 +147,19 @@ function Wizrd() {
             </Link>
           ))}
         </div>
+        <span
+          className="text-blue-600 underline text-xs cursor-pointer block text-center"
+          onClick={() => setShowMore(!showMore)}
+        >
+          Show {showMore ? "less" : "more"}
+        </span>
       </div>
 
-      <div className="flex flex-col gap-12">
+      <div className="flex flex-col gap-5 2xl:gap-12">
         <p className="text-center">
-          Just getting started?{" "}
+          Provider not listed?{" "}
           <Link href="/calender" className="underline">
-            Try Grunt Calender
+            Add Custom
           </Link>
         </p>
 

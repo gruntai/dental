@@ -7,14 +7,8 @@ function Sidebar() {
   return (
     <aside className="w-[350px] h-screen fixed left-0 top-0 hidden lg:block bg-[#F7F7F7]">
       {/* logo */}
-      <div className="border-b h-16 flex items-center bg-white mb-5">
-        <Image
-          src="/assets/images/logos/grunt_logo.png"
-          alt="grunt logo"
-          width={150}
-          height={30}
-          className="pl-5"
-        />
+      <div className="h-16 flex items-center bg-white mb-5 border-b border-black">
+
       </div>
       <div className="px-5 space-y-5">
         <span className="border rounded-lg px-3 py-1.5 text-[#7D7D7D] text-xs font-semibold flex items-center gap-2 w-fit bg-white">

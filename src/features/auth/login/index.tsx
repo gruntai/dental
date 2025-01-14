@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export function LoginForm({
   className,
@@ -22,16 +23,24 @@ export function LoginForm({
       }}
     >
       <div className="flex gap-2 text-center mb-5">
-        <p className="text-balance text-3xl text-black/90">Sign in</p>
+        <p className="text-balance text-3xl text-black/90 flex items-center gap-3">
+          <Image
+            src="/assets/images/hand.png"
+            width={30}
+            height={30}
+            alt="hand image"
+          />
+          Sign in
+        </p>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email" className="font-semibold">
-            Email
+            Email Adress
           </Label>
           <Input id="email" type="email" placeholder="m@example.com" required />
         </div>
-        <div className="grid gap-2">
+        <div className="grid gap-2 mb-7">
           <div className="flex w-full items-center justify-between">
             <Label htmlFor="password" className="font-semibold">
               Password
@@ -45,7 +54,7 @@ export function LoginForm({
           </div>
           <Input id="password" type="password" required />
         </div>
-        <Button type="submit" className="w-full" asChild>
+        <Button type="submit" className="w-full rounded-3xl h-12" asChild>
           <Link href="/wizard">Sign in</Link>
         </Button>
       </div>

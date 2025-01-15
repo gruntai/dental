@@ -1,0 +1,26 @@
+.custom-time-indicator {
+  height: 2px;
+  background: #f74969;
+  position: relative;
+  z-index: 10;
+  left: -202%;
+  width: 303%;
+}
+
+.custom-time-indicator::before {
+  content: attr(data-time);
+  position: absolute;
+  top: -11px;
+  left: -42px;
+  height: 24px;
+  width: 42px;
+  padding: 1px 4px;
+  border: 2px solid #f74969;
+  border-radius: 13px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #f74969;
+  background: white;
+  box-shadow: 0px 0px 6px 1px white;
+  word-wrap: normal;
+}

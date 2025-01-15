@@ -4,6 +4,7 @@ import {
   Components,
   momentLocalizer,
   View,
+  Views,
 } from "react-big-calendar";
 import moment from "moment";
 import "moment-timezone"; // or 'moment-timezone/builds/moment-timezone-with-data[-datarange].js'. See their docs
@@ -13,8 +14,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Clock4, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import PotentialToShow from "./potiential-to-show";
+import TimeSlot from "./timeslot";
 
 // Set the IANA time zone you want to use
 moment.tz.setDefault("Europe/Paris");
@@ -23,6 +25,23 @@ moment.tz.setDefault("Europe/Paris");
 // to the correct localizer.
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
+const today = new Date();
+const workingHoursStart = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate(),
+  10,
+  0,
+  0
+); // 9 AM
+const workingHoursEnd = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate(),
+  19,
+  0,
+  0
+); // 5 PM
 
 // Define the event type
 type MyEvent = {
@@ -51,9 +70,9 @@ const events: MyEvent[] = [
     title: "Event 1",
     data: {
       node: (data: any) => (
-        <div className="relative flex h-full w-full animate-pulse-ongoing">
+        <div className="relative flex h-full w-full">
           {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fffcf5] opacity-50"></span>{" "} */}
-          <div className="border-2 border-[#ffcb34] rounded-md px-2 py-3 w-full h-full bg-[#fffcf5]">
+          <div className="border-[3px] border-[#ffcb34] rounded-md px-2 py-3 w-full h-full bg-[#fffcf5]">
             <span className="bg-[#ffcb34] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
               ONGOING
             </span>
@@ -86,7 +105,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing">
+        <div className="border-[3px] border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing">
           <span className="bg-[#cc7428] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             LAST MINUTE CANCELLATION
           </span>
@@ -105,7 +124,7 @@ const events: MyEvent[] = [
   //     node: (data: any) => (
   //       <div className="relative flex h-full w-full animate-pulse-ongoing">
   //         {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
-  //         <div className="animate border-2 border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
+  //         <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
   //           <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
   //             POTENTIAL NO SHOW
   //           </span>
@@ -125,7 +144,7 @@ const events: MyEvent[] = [
       node: (data: any) => (
         <div className="relative flex h-full w-full animate-pulse-ongoing">
           {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
-          <div className="animate border-2 border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
+          <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
             <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
               POTENTIAL NO SHOW
             </span>
@@ -148,7 +167,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -165,7 +184,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -182,7 +201,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -200,7 +219,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -218,7 +237,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -235,7 +254,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -252,7 +271,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -269,7 +288,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -286,7 +305,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -303,7 +322,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -320,7 +339,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -337,7 +356,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-2 border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -351,6 +370,11 @@ const events: MyEvent[] = [
 ];
 
 const components: Components<MyEvent, object> = {
+  // timeSlotWrapper: (props) => {
+  //   const { step, day, isRender } = props;
+  //   return TimeSlot(props, step, day, isRender);
+  // },
+  // timeSlotWrapper: (props) => TimeSlot(props),
   event: ({ event }) => {
     return <>{event?.data?.node({ event })}</>;
   },
@@ -413,7 +437,35 @@ const components: Components<MyEvent, object> = {
 };
 
 const MyCalendar = () => {
-  const today = new Date();
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const updateTimeIndicator = (view) => {
+        const timeIndicator = document.querySelector(
+          ".rbc-current-time-indicator"
+        );
+        console.log(timeIndicator);
+
+        if (timeIndicator) {
+          const nDayOfWeek = moment().day();
+          let left;
+          let width;
+
+          if (view === Views.DAY) {
+            left = 0;
+            width = 100;
+          } else {
+            left = (nDayOfWeek - 1) * -100;
+            width = 700;
+          }
+
+          timeIndicator.style.setProperty("--width", `${width}%`);
+          timeIndicator.style.setProperty("--left", `${left}%`);
+        }
+      };
+      updateTimeIndicator("week");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className="myCustomHeight w-full px-5 pb-10">
       <Calendar<MyEvent>
@@ -425,13 +477,10 @@ const MyCalendar = () => {
         className="w-full overflow-auto relative font-roboto"
         defaultView="week"
         components={components}
-        min={
-          new Date(today.getFullYear(), today.getMonth(), today.getDate(), 10)
-        }
-        max={
-          new Date(today.getFullYear(), today.getMonth(), today.getDate(), 19)
-        }
+        min={workingHoursStart}
+        max={workingHoursEnd}
         formats={customFormats}
+
         // show working days only
         // dayPropGetter={(date) => {
         //   const day = date.getDay();

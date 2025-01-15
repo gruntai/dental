@@ -70,13 +70,17 @@ function PotentialToShow({ data }: { data: any }) {
 
   return (
     <div
-      className="relative flex h-full w-full animate-pulse-ongoing z-20"
+      className="relative flex h-full w-full z-20"
       onClick={handleShowWorkflow}
     >
       <div
-        className={
-          "animate border-2 border-[#ff6733] rounded-md px-2 py-3 w-full bg-[#fff7f5]"
-        }
+        className={cn(
+          "animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full bg-[#fff7f5]",
+          {
+            "border-[#29CC39]": isConfirmed,
+            " animate-pulse-ongoing": !isConfirmed,
+          }
+        )}
       >
         {!isConfirmed && (
           <>
@@ -92,7 +96,11 @@ function PotentialToShow({ data }: { data: any }) {
                 POTENTIAL NO SHOW
               </span>
             </div>
-            <p className="text-black text-xs xl:text-base mb-2 font-bold">
+            <p
+              className={cn("text-black text-xs xl:text-base mb-2 font-bold", {
+                "text-[#4D5E80]": isConfirmed,
+              })}
+            >
               {moment(data.event.start).format("h:mm a")} John Doe
             </p>
             <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-black">
@@ -255,7 +263,8 @@ function PotentialToShow({ data }: { data: any }) {
       {/* Arrow */}
       <div
         className={cn("duration-300 opacity-0 pointer-events-none", {
-          "fade-in-100 opacity-100 pointer-events-auto": showWorkflow,
+          "fade-in-100 opacity-100 pointer-events-auto":
+            showWorkflow && !isConfirmed,
         })}
       >
         <span className="w-2 h-2 rounded-full bg-black absolute top-5 right-2"></span>

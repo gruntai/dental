@@ -16,6 +16,7 @@ const config: Config = {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        roboto: ["var(--font-roboto)", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -69,8 +70,8 @@ const config: Config = {
           "50%": {
             // transform: "scale(1.1)",
             // boxShadow: "0 0 0 10px var(--state-ongoing)",
-            boxShadow: "0 0 0 60px rgba(229, 62, 62, 0)",
-            opacity: "0.8",
+            boxShadow: "0 0 0 15px rgba(229, 62, 62, 0)",
+            opacity: "1",
           },
           "100%": {
             // transform: "scale(0.9)",

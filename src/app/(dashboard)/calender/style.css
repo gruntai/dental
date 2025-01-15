@@ -37,6 +37,10 @@
   outline: 0;
 }
 
+.rbc-event {
+  overflow: visible !important;
+}
+
 .rbc-event:focus {
   outline: 0;
 }
@@ -60,6 +64,18 @@
 
 /* line */
 .rbc-current-time-indicator {
+  /* width: 100vw !important;
+  left: -auto; */
+}
+
+/* scrollbar for calender */
+.rbc-time-content {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.rbc-time-content::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
 }
 
 /* time column */

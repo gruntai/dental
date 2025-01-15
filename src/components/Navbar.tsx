@@ -15,12 +15,7 @@ function Navbar() {
         className="pl-5"
       />
       <div className="flex  items-start md:items-center gap-4 px-5 md:justify-end">
-        <span className="opacity-70 hidden lg:block">
-          Last run: 5 Jun,14:53
-        </span>
         <div className="flex flex-wrap gap-5 items-center">
-          {/* dividor */}
-          <div className="w-0.5 h-5 bg-slate-200 hidden lg:block"></div>
           <Button
             variant={"outline"}
             className="border rounded-md px-2 py-1 flex items-center gap-2"

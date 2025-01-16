@@ -146,11 +146,9 @@ export function Signup({
             <SelectContent>
               <SelectGroup>
                 <SelectLabel>Countries</SelectLabel>
-                <SelectItem value="saudi-arabia">Saudi Arabia</SelectItem>
-                <SelectItem value="uas">Unitied Arab Emirates</SelectItem>
-                <SelectItem value="kuwait">Kuwait</SelectItem>
-                <SelectItem value="oman">Oman</SelectItem>
-                <SelectItem value="qatar">Qatar</SelectItem>
+                <SelectItem value="usa">United States</SelectItem>
+                <SelectItem value="uk">United Kingdom</SelectItem>
+                <SelectItem value="canada">Canada</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>{" "}

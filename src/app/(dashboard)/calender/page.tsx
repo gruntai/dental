@@ -65,7 +65,9 @@ const events: MyEvent[] = [
     title: "Event 1",
     data: {
       node: (data: any) => (
-        <div className="relative flex h-full w-full">
+        <div className="relative flex h-full w-full z-10 ">
+          {/* line */}
+          {/* <div className="absolute h-0.5 w-full bg-[#ff6633] top-10 custom-line"></div> */}
           {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fffcf5] opacity-50"></span>{" "} */}
           <div className="border-[3px] border-[#ffcb34] rounded-md px-2 py-3 w-full h-full bg-[#fffcf5]">
             <span className="bg-[#ffcb34] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
@@ -222,6 +224,26 @@ const events: MyEvent[] = [
             {moment(data.event.start).format("h:mm a")} Nora Lopez
           </p>{" "}
           Hassan Clark
+        </div>
+      ),
+    },
+  },
+  {
+    start: moment("2025-01-14T12:00:00").toDate(),
+    end: moment("2025-01-14T13:00:00").toDate(),
+    title: "Event 5",
+    data: {
+      node: (data: any) => (
+        <div className="relative flex h-full w-full animate-pulse-ongoing">
+          {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
+          <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
+            <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              POTENTIAL NO SHOW
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Mahmoud Sangh
+            </p>
+          </div>
         </div>
       ),
     },
@@ -457,6 +479,31 @@ const MyCalendar = () => {
       const timeIndicator = document.querySelector(
         ".rbc-current-time-indicator"
       );
+
+      // const indicator = document.querySelector(".custom-line");
+      const indicatorWrapper = document.querySelector(
+        ".rbc-time-gutter.rbc-time-column .rbc-timeslot-group"
+      );
+      indicatorWrapper.style.position = "relative";
+      // Create the new div element
+      const customLine = document.createElement("div");
+
+      // Add styles to match Tailwind classes
+      customLine.style.position = "absolute";
+      customLine.style.height = "2px";
+      customLine.style.width = "1800px";
+      customLine.style.backgroundColor = "#ff6633";
+      customLine.style.top = "50px";
+      customLine.style.zIndex = "50";
+      customLine.style.left = "3px";
+
+      // Add a custom class name for any additional targeting if needed
+      customLine.classList.add("custom-line");
+
+      // Append the created div to the parent
+      indicatorWrapper?.appendChild(customLine);
+      console.log(customLine);
+
       console.log(currentView);
       let indicatorStyle = { left: 0, width: 0 };
       if (currentView === Views.DAY) {
@@ -473,6 +520,13 @@ const MyCalendar = () => {
         timeIndicator.style.width = `${indicatorStyle.width}px`;
         timeIndicator.style.left = `${indicatorStyle.left}%`;
       }
+      // if (indicator) {
+      //   if (currentView === Views.DAY) {
+      //     indicator.style.width = "105%";
+      //   } else {
+      //     indicator.style.width = "767%";
+      //   }
+      // }
     }, 0);
 
     //       }

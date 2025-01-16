@@ -48,8 +48,6 @@ function PotentialToShow({ data }: { data: any }) {
       }, 3000);
   }, [showThirdBox]);
 
-  console.log("hello");
-
   // Countdown logic
   // useEffect(() => {
   //   if (timeLeft > 0) {

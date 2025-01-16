@@ -30,36 +30,43 @@ export const ReusableCard = ({
 
   return (
     <Card className="w-full p-5 shadow-none relative">
-      <div className="flex items-center gap-3">
-        <Image src={imageSrc} alt={alt} width={45} height={45} />
-        <div className=" break-all hyphens-auto">
-          <p className="font-semibold">{title}</p>
-          <p className="text-xs font-bold text-slate-400 flex hyphens-auto w-full">
-            {isInputVisible ? (
-              <div className="flex items-end gap-2">
-                <Input
-                  type="text"
-                  value={submittedValue}
-                  onChange={(e) => setSubmittedValue(e.target.value)}
-                  onBlur={handleSubmit}
-                  placeholder="Enter value"
-                  className="border-0 border-b py-0 pb-1 h-auto font-light pl-0 !outline-none text-sm w-full mt-0"
-                />
-                {/* <button
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <Image src={imageSrc} alt={alt} width={45} height={45} />
+          <div className=" break-all hyphens-auto">
+            <p className="font-semibold">{title}</p>
+            <p className="text-xs font-bold text-slate-400 flex hyphens-auto w-full">
+              {isInputVisible ? (
+                <div className="flex items-end gap-2">
+                  <Input
+                    type="text"
+                    value={submittedValue}
+                    onChange={(e) => setSubmittedValue(e.target.value)}
+                    onBlur={handleSubmit}
+                    placeholder="Enter value"
+                    className="border-0 border-b py-0 pb-1 h-auto font-light pl-0 !outline-none text-sm w-full mt-0"
+                  />
+                  {/* <button
                   onClick={handleSubmit}
                   className="bg-blue-500 text-white text-[5px] w-4 h-4 flex items-center justify-center rounded"
                 >
                   --&gt;
                 </button> */}
-              </div>
-            ) : submittedValue ? (
-              submittedValue
-            ) : (
-              description
-            )}
-          </p>
+                </div>
+              ) : submittedValue ? (
+                submittedValue
+              ) : (
+                description
+              )}
+            </p>
+          </div>
         </div>
-      </div>
+      </form>
 
       {children && <div className="mt-5">{children}</div>}
       <CardSettings onClick={handleToggleInput} />
@@ -87,7 +94,7 @@ export const cardData = [
     imageSrc: "/assets/images/purple-card.png",
     alt: "purple card",
     title: "Second Confirmation",
-    description: "Confirm at 9 PM on appointment day",
+    description: "Confirm at 9 PM on an appointment day",
     children: (
       <>
         <hr className="mb-5 -mx-5" />
@@ -95,10 +102,10 @@ export const cardData = [
           <p className="text-lg font-semibold mb-1 text-[#8897A0]">
             --&gt; If no confirmation
           </p>
-          <p className="text-md text-slate-400 flex gap-2 items-center">
+          <div className="text-md text-slate-400 flex gap-2 items-center">
             Call and text until
             <Time time="10:00 AM" />
-          </p>
+          </div>
         </div>
       </>
     ),
@@ -121,29 +128,34 @@ function Time({ time }: { time: string }) {
   };
 
   const handleToggleInput = () => {
-    console.log("clicked");
-
     setInputVisible(true);
   };
 
   return (
-    <span
-      className={`bg-[#E9F7F7] px-2 py-1 text-sm rounded-md font-semibold block w-[88px] text-center`}
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleBlur();
+      }}
     >
-      {isInputVisible ? (
-        <Input
-          type="text"
-          value={currentValue}
-          onChange={(e) => setCurrentValue(e.target.value)}
-          onBlur={handleBlur}
-          placeholder="Enter value"
-          className="border-0 border-b py-0 h-auto font-light pl-0 !outline-none text-sm w-full bg-transparent mt-0"
-        />
-      ) : (
-        <span onClick={handleToggleInput} className="cursor-pointer">
-          {currentValue}
-        </span>
-      )}
-    </span>
+      <span
+        className={`bg-[#E9F7F7] px-2 py-1 text-sm rounded-md font-semibold block w-[88px] text-center break-`}
+      >
+        {isInputVisible ? (
+          <Input
+            type="text"
+            value={currentValue}
+            onChange={(e) => setCurrentValue(e.target.value)}
+            onBlur={handleBlur}
+            placeholder="Enter value"
+            className="border-0 border-b py-0 h-auto font-light pl-0 !outline-none text-sm w-full bg-transparent mt-0"
+          />
+        ) : (
+          <span onClick={handleToggleInput} className="cursor-pointer">
+            {currentValue}
+          </span>
+        )}
+      </span>
+    </form>
   );
 }

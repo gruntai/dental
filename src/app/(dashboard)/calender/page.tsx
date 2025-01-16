@@ -14,34 +14,10 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Clock4, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import PotentialToShow from "./potiential-to-show";
 import TimeSlot from "./timeslot";
-
-// Set the IANA time zone you want to use
-moment.tz.setDefault("Europe/Paris");
-
-// Setup the localizer by providing the moment Object
-// to the correct localizer.
-
-const localizer = momentLocalizer(moment); // or globalizeLocalizer
-const today = new Date();
-const workingHoursStart = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate(),
-  10,
-  0,
-  0
-); // 9 AM
-const workingHoursEnd = new Date(
-  today.getFullYear(),
-  today.getMonth(),
-  today.getDate(),
-  19,
-  0,
-  0
-); // 5 PM
+import Provider from "./provider";
 
 // Define the event type
 type MyEvent = {
@@ -52,6 +28,25 @@ type MyEvent = {
     node?: (data: any) => ReactNode;
   };
 };
+
+const localizer = momentLocalizer(moment); // or globalizeLocalizer
+const today = new Date();
+const workingHoursStart = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate(),
+  9,
+  0,
+  0
+); // 9 AM
+const workingHoursEnd = new Date(
+  today.getFullYear(),
+  today.getMonth(),
+  today.getDate(),
+  18,
+  0,
+  0
+); // 5 PM
 
 const customFormats = {
   dayFormat: (date: Date, culture?: string) => moment(date).format("ddd DD/MM"),
@@ -437,61 +432,78 @@ const components: Components<MyEvent, object> = {
 };
 
 const MyCalendar = () => {
+  const [currentView, setCurrentView] = useState<View>(Views.WEEK);
+
+  const handleViewChange = (view: View) => {
+    console.log("Current View:", view); // Logs the current view ('month', 'week', 'day', etc.)
+    setCurrentView(view);
+  };
   useEffect(() => {
-    const timer = setTimeout(() => {
-      const updateTimeIndicator = (view) => {
-        const timeIndicator = document.querySelector(
-          ".rbc-current-time-indicator"
-        );
-        console.log(timeIndicator);
+    //   const timer = setTimeout(() => {
+    //     const updateTimeIndicator = (view) => {
+    //       console.log(timeIndicator);
 
-        if (timeIndicator) {
-          const nDayOfWeek = moment().day();
-          let left;
-          let width;
+    //       if (timeIndicator) {
+    //         const nDayOfWeek = moment().day();
+    //         let left;
+    //         let width;
+    setTimeout(() => {
+      const timeIndicator = document.querySelector(
+        ".rbc-current-time-indicator"
+      );
+      console.log(currentView);
+      let indicatorStyle = { left: 0, width: 0 };
+      if (currentView === Views.DAY) {
+        indicatorStyle.left = -4.85;
+        indicatorStyle.width = 1788;
+      } else {
+        indicatorStyle.left = -434;
+        indicatorStyle.width = 1794;
+      }
+      console.log("this is indeicator");
 
-          if (view === Views.DAY) {
-            left = 0;
-            width = 100;
-          } else {
-            left = (nDayOfWeek - 1) * -100;
-            width = 700;
-          }
+      console.log(timeIndicator);
+      if (timeIndicator) {
+        timeIndicator.style.width = `${indicatorStyle.width}px`;
+        timeIndicator.style.left = `${indicatorStyle.left}%`;
+      }
+    }, 0);
 
-          timeIndicator.style.setProperty("--width", `${width}%`);
-          timeIndicator.style.setProperty("--left", `${left}%`);
-        }
-      };
-      updateTimeIndicator("week");
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    //       }
+    //     };
+    //     updateTimeIndicator("week");
+    //   }, 1000);
+    //   return () => clearTimeout(timer);
+  }, [currentView]);
   return (
-    <div className="myCustomHeight w-full px-5 pb-10">
-      <Calendar<MyEvent>
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: "100vh" }}
-        className="w-full overflow-auto relative font-roboto"
-        defaultView="week"
-        components={components}
-        min={workingHoursStart}
-        max={workingHoursEnd}
-        formats={customFormats}
+    <Provider>
+      <div className="myCustomHeight w-full px-5 pb-10">
+        <Calendar<MyEvent>
+          onView={handleViewChange}
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: "100vh" }}
+          className="w-full overflow-auto relative font-roboto"
+          defaultView="week"
+          components={components}
+          min={workingHoursStart}
+          max={workingHoursEnd}
+          formats={customFormats}
 
-        // show working days only
-        // dayPropGetter={(date) => {
-        //   const day = date.getDay();
-        //   // Hide Saturday (6) and Sunday (0)
-        //   if (day === 0 || day === 6) {
-        //     return { style: { display: "none" } };
-        //   }
-        //   return {};
-        // }}
-      />
-    </div>
+          // show working days only
+          // dayPropGetter={(date) => {
+          //   const day = date.getDay();
+          //   // Hide Saturday (6) and Sunday (0)
+          //   if (day === 0 || day === 6) {
+          //     return { style: { display: "none" } };
+          //   }
+          //   return {};
+          // }}
+        />
+      </div>
+    </Provider>
   );
 };
 

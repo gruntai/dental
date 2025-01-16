@@ -22,7 +22,7 @@ export function LoginForm({
         router.push("/dashboard");
       }}
     >
-      <div className="flex gap-2 text-center mb-5">
+      <div className="flex gap-2 text-center mb-2">
         <p className="text-balance text-3xl text-black/90 flex items-center gap-3">
           <Image
             src="/assets/images/hand.png"
@@ -60,7 +60,7 @@ export function LoginForm({
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <Link href="/sign-up" className="underline underline-offset-4">
+        <Link href="/signup" className="underline underline-offset-4">
           Create an account
         </Link>
       </div>

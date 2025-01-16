@@ -13,7 +13,7 @@ function Layout({ children }: { children: React.ReactNode }) {
               <Image
                 src="/assets/images/logos/grunt_logo.png"
                 alt="grunt logo"
-                width={150}
+                width={130}
                 height={30}
               />
             </Link>

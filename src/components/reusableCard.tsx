@@ -4,6 +4,7 @@ import { Ellipsis } from "lucide-react";
 
 import { useState } from "react";
 import { Input } from "./ui/input";
+import { cn } from "@/lib/utils";
 
 export const ReusableCard = ({
   imageSrc,
@@ -29,7 +30,7 @@ export const ReusableCard = ({
   };
 
   return (
-    <Card className="w-full p-5 shadow-none relative">
+    <Card className="w-full p-5 shadow-none relative border-[#E9EBED]">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -39,8 +40,8 @@ export const ReusableCard = ({
         <div className="flex items-center gap-3">
           <Image src={imageSrc} alt={alt} width={45} height={45} />
           <div className=" break-all hyphens-auto">
-            <p className="font-semibold">{title}</p>
-            <p className="text-xs font-bold text-slate-400 flex hyphens-auto w-full">
+            <p className="font-semibold text-[#86959E]">{title}</p>
+            <p className="text-xs text-[#B9C1C7] flex hyphens-auto w-full">
               {isInputVisible ? (
                 <div className="flex items-end gap-2">
                   <Input
@@ -76,7 +77,7 @@ export const ReusableCard = ({
 
 function CardSettings({ onClick }: { onClick: () => void }) {
   return (
-    <div className="w-5 h-5 flex items-center justify-center bg-[#F7F7F7] absolute top-3 right-3 rounded-md cursor-pointer">
+    <div className="w-6 h-6 flex items-center justify-center bg-[#F7F7F7] absolute top-3 right-3 rounded-md cursor-pointer">
       <Ellipsis className="w-4 h-4" onClick={onClick} />
     </div>
   );
@@ -97,12 +98,12 @@ export const cardData = [
     description: "Confirm at 9 PM on an appointment day",
     children: (
       <>
-        <hr className="mb-5 -mx-5" />
+        <hr className="mb-5 -mx-5 border-[#E9EBED]" />
         <div>
-          <p className="text-lg font-semibold mb-1 text-[#8897A0]">
+          <p className="font-medium mb-1 text-[#8897A0]">
             --&gt; If no confirmation
           </p>
-          <div className="text-md text-slate-400 flex gap-2 items-center">
+          <div className="text-sm text-[#95A3AB] flex gap-2 items-center font-medium">
             Call and text until
             <Time time="10:00 AM" />
           </div>
@@ -139,7 +140,12 @@ function Time({ time }: { time: string }) {
       }}
     >
       <span
-        className={`bg-[#E9F7F7] px-2 py-1 text-sm rounded-md font-semibold block w-[88px] text-center break-`}
+        className={cn(
+          `bg-[#E9F7F7] text-sm rounded-md font-medium block w-[88px] h-7 leading-7 text-center break-all hyphens-auto`,
+          {
+            "py-1 px-2": isInputVisible,
+          }
+        )}
       >
         {isInputVisible ? (
           <Input
@@ -151,7 +157,10 @@ function Time({ time }: { time: string }) {
             className="border-0 border-b py-0 h-auto font-light pl-0 !outline-none text-sm w-full bg-transparent mt-0"
           />
         ) : (
-          <span onClick={handleToggleInput} className="cursor-pointer">
+          <span
+            onClick={handleToggleInput}
+            className="cursor-pointer text-[#95ADB9]"
+          >
             {currentValue}
           </span>
         )}

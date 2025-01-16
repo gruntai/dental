@@ -71,7 +71,7 @@ const events: MyEvent[] = [
             <span className="bg-[#ffcb34] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
               ONGOING
             </span>
-            <p className="text-black text-xs xl:text-base mb-2 font-bold">
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
               {moment(data.event.start).format("h:mm a")} Nejat Murad
             </p>
             <Image
@@ -100,11 +100,11 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing">
+        <div className="border-[3px] border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing ">
           <span className="bg-[#cc7428] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             LAST MINUTE CANCELLATION
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Noora Knight
           </p>
         </div>
@@ -123,7 +123,7 @@ const events: MyEvent[] = [
   //           <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
   //             POTENTIAL NO SHOW
   //           </span>
-  //           <p className="text-black text-xs xl:text-base mb-2 font-bold">
+  //           <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
   //             {moment(data.event.start).format("h:mm a")} Sonya Jess
   //           </p>
   //         </div>
@@ -143,10 +143,10 @@ const events: MyEvent[] = [
             <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
               POTENTIAL NO SHOW
             </span>
-            <p className="text-black text-xs xl:text-base mb-2 font-bold">
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
               {moment(data.event.start).format("h:mm a")} Josie Fell
             </p>
-            <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-black">
+            <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-[#1C1F23]">
               Contact customer via call and text until 11 AM --&gt;If no
               response offer spot to other customers
             </p>
@@ -166,7 +166,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Layla Brown
           </p>
         </div>
@@ -183,7 +183,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Fatima Lee
           </p>
         </div>
@@ -200,7 +200,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Hassan Clark
           </p>{" "}
           Hassan Clark
@@ -218,7 +218,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Nora Lopez
           </p>{" "}
           Hassan Clark
@@ -236,7 +236,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Hassan Clark
           </p>{" "}
         </div>
@@ -253,7 +253,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Aisha Green
           </p>{" "}
         </div>
@@ -270,7 +270,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Khalid Carte
           </p>{" "}
         </div>
@@ -287,7 +287,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Rana White
           </p>{" "}
         </div>
@@ -304,7 +304,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Rana White
           </p>{" "}
         </div>
@@ -321,7 +321,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Ahmed Joss
           </p>{" "}
         </div>
@@ -338,7 +338,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Travis Fuller
           </p>{" "}
         </div>
@@ -355,7 +355,7 @@ const events: MyEvent[] = [
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
-          <p className="text-black text-xs xl:text-base mb-2 font-bold">
+          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
             {moment(data.event.start).format("h:mm a")} Zaid Wilson
           </p>{" "}
         </div>
@@ -378,7 +378,7 @@ const components: Components<MyEvent, object> = {
       <div className="flex justify-between mb-10 sticky left-0 top-0">
         <Button
           variant={"outline"}
-          className="w-fit rounded-3xl"
+          className="w-fit text-[#6B7A99] font-bold rounded-3xl border-[#F5F6F7] border-2"
           onClick={() => onNavigate("TODAY")}
         >
           Today
@@ -386,19 +386,25 @@ const components: Components<MyEvent, object> = {
         <div className="gap-5 flex items-center">
           <Button
             variant={"outline"}
-            className="w-10 h-10 rounded-full"
+            className="w-10 h-10 rounded-full text-[#6B7A99] font-bold border-[#F5F6F7] border-2 group"
             onClick={() => onNavigate("PREV")}
           >
-            <ChevronLeft />
+            <ChevronLeft
+              className="text-[#C3CAD9] group-hover:text-black duration-300 "
+              strokeWidth={3}
+            />
           </Button>
           <span className="rbc-toolbar-label">{label}</span>
 
           <Button
             variant={"outline"}
-            className="w-10 h-10 rounded-full"
+            className="w-10 h-10 rounded-full text-[#6B7A99] font-bold border-[#F5F6F7] border-2 group"
             onClick={() => onNavigate("NEXT")}
           >
-            <ChevronRight />
+            <ChevronRight
+              className="text-[#C3CAD9] group-hover:text-black duration-300 "
+              strokeWidth={3}
+            />
           </Button>
         </div>
 
@@ -409,9 +415,9 @@ const components: Components<MyEvent, object> = {
               key={type}
               onClick={() => onView(type.toLowerCase() as View)}
               className={cn(
-                "border-0 border-l rounded-none text-slate-400 font-semibold",
+                "border-0 border-l rounded-none text-[#ADB8CC] font-bold  border-[#F5F6F7] hover:text-[#6B7A99] duration-300",
                 {
-                  "text-black": view === type.toLowerCase(),
+                  "text-[#6B7A99]": view === type.toLowerCase(),
                 }
               )}
             >

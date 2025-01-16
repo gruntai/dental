@@ -10,6 +10,7 @@ import {
   CirclePlay,
   EllipsisVertical,
   PlusCircle,
+  Workflow,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +66,8 @@ function PotentialToShow({ data }: { data: any }) {
     const secs = seconds % 60;
     return `${minutes}:${secs.toString().padStart(2, "0")}`;
   };
+  console.log("workflow is goning on...", showWorkflow);
+  console.log("workflow is confirmed?", isConfirmed);
 
   return (
     <div
@@ -76,7 +79,7 @@ function PotentialToShow({ data }: { data: any }) {
           "animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full bg-[#fff7f5]",
           {
             "border-[#29CC39]": isConfirmed,
-            " animate-pulse-ongoing": !isConfirmed,
+            " animate-pulse-ongoing": !showWorkflow && !isConfirmed,
           }
         )}
       >
@@ -95,13 +98,13 @@ function PotentialToShow({ data }: { data: any }) {
               </span>
             </div>
             <p
-              className={cn("text-black text-xs xl:text-base mb-2 font-bold", {
-                "text-[#4D5E80]": isConfirmed,
-              })}
+              className={cn(
+                "text-[#4D5E80] text-xs xl:text-base mb-2 font-bold"
+              )}
             >
-              {moment(data.event.start).format("h:mm a")} John Doe
+              {moment(data.event.start).format("h:mm a")} Sara Khan
             </p>
-            <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-black">
+            <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-[#1C1F23]">
               Contact customer via call and text until 10 AM --&gt;If no
               response offer spot to other customers
             </p>{" "}
@@ -115,8 +118,8 @@ function PotentialToShow({ data }: { data: any }) {
                 Confirmed 2 Hours Ago
               </span>
             </div>
-            <p className="text-black text-xs xl:text-base mb-2 font-bold">
-              {moment(data.event.start).format("h:mm a")} John Doe
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Sara Khan
             </p>
             <div className="bg-[#33BFFF] text-white rounded-md p-2 flex items-center text-[8px] font-semibold w-fit mb-2">
               ADDED FROM WAITLIST{" "}

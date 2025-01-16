@@ -68,13 +68,13 @@ const config: Config = {
             opacity: "1",
           },
           "50%": {
-            // transform: "scale(1.1)",
+            // transform: "scale(1.01)",
             // boxShadow: "0 0 0 10px var(--state-ongoing)",
-            boxShadow: "0 0 0 15px rgba(229, 62, 62, 0)",
-            opacity: "1",
+            boxShadow: "0 0 0 25px rgba(229, 62, 62, 0)",
+            opacity: "0.5",
           },
           "100%": {
-            // transform: "scale(0.9)",
+            // transform: "scale(1)",
             opacity: "1",
           },
         },
@@ -82,6 +82,25 @@ const config: Config = {
       animation: {
         "pulse-ongoing": "pulse-ongoing 2s infinite",
       },
+      // animation: {
+      //   pulse: "pulse 3s ease-in-out infinite", // Extend the duration to 3s
+      // },
+      // keyframes: {
+      //   pulse: {
+      //     "0%, 100%": {
+      //       opacity: "1",
+      //       boxShadow: "0 0 0 0 var(--state-ongoing)",
+      //     }, // Stronger shadow
+      //     "50%": {
+      //       opacity: "0.5",
+      //       boxShadow: "0 0 0 15px rgba(229, 62, 62, 0)",
+      //     },
+      //     "100%": {
+      //       opacity: "1",
+      //       // boxShadow: "0 0 0 0 var(--state-ongoing)",
+      //     } // Shadow change at mid pulse
+      //   },
+      // },
     },
   },
   plugins: [require("tailwindcss-animate")],

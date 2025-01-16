@@ -66,6 +66,7 @@
 .rbc-current-time-indicator {
   width: 1800px;
   left: -434%;
+  top: 10% !important;
   background-color: #ff6633;
   height: 2px;
   z-index: 50000; /* Change the color of the current time line */

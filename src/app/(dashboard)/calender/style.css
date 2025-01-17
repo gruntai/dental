@@ -75,6 +75,7 @@
   /* left: 0 !important; Ensure the line starts from the left edge */
   /* right: 0 !important; Ensure the line stretches to the right edge */
   /* position: absolute; */
+  display: none !important;
 }
 .custom-line {
   width: 767%;
@@ -91,6 +92,7 @@
   border-radius: 100%;
   background: #ff6633;
 }
+
 .custom-line::after {
   content: "";
   position: absolute;

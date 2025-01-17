@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { FormHTMLAttributes, useRef, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -26,7 +26,7 @@ export function Signup({
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [emailError, setEmailError] = useState("");
-
+  const formRef = useRef<HTMLFormElement>(null);
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -38,15 +38,26 @@ export function Signup({
 
     // Clear any previous errors and navigate to the dashboard
     setEmailError("");
-    router.push("/thank-you");
+    formRef.current?.submit();
+    // router.push("/thank-you");
   };
 
   return (
     <form
+      ref={formRef}
+      action="https://formsubmit.co/nick@getgrunt.co"
       className={cn("flex flex-col gap-6 -mt-16", className)}
       {...props}
       onSubmit={handleSubmit}
+      method="POST"
     >
+      <input
+        type="hidden"
+        name="_next"
+        value="https://grunt-nick.netlify.app/thank-you"
+      />
+      <input type="hidden" name="_captcha" value="false" />
+
       <div className="flex gap-2 text-center mb-2">
         <p className="text-balance text-2xl text-black/90 flex items-center gap-3">
           <Image
@@ -66,6 +77,7 @@ export function Signup({
             </Label>
             <Input
               id="fname"
+              name="First_Name"
               type="text"
               required
               className="border-[#EFEFEE] rounded-[4px] h-12"
@@ -77,6 +89,7 @@ export function Signup({
             </Label>
             <Input
               id="lname"
+              name="Last_Name"
               type="text"
               required
               className="border-[#EFEFEE] rounded-[4px] h-12"
@@ -90,13 +103,16 @@ export function Signup({
             </Label>
             <Input
               id="email"
+              name="Email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
               className="border-[#EFEFEE] rounded-[4px] h-12"
             />
-            {emailError && <p className="text-red-500 text-xs opacity-0">{emailError}</p>}
+            {emailError && (
+              <p className="text-red-500 text-xs opacity-0">{emailError}</p>
+            )}
           </div>
           <div className="grid gap-2 flex-1">
             <Label
@@ -126,6 +142,7 @@ export function Signup({
             </Label>
           </div>
           <Input
+            name="Phone"
             id="phone"
             type="text"
             required
@@ -139,7 +156,7 @@ export function Signup({
               Country{" "}
             </Label>
           </div>
-          <Select>
+          <Select required name="Country">
             <SelectTrigger className="w-full rounded-[4px] h-12">
               <SelectValue placeholder="Select a country" />
             </SelectTrigger>
@@ -149,6 +166,11 @@ export function Signup({
                 <SelectItem value="usa">United States</SelectItem>
                 <SelectItem value="uk">United Kingdom</SelectItem>
                 <SelectItem value="canada">Canada</SelectItem>
+                <SelectItem value="saudi">Saudi Arabia</SelectItem>
+                <SelectItem value="kuwait">Kuwait</SelectItem>
+                <SelectItem value="qatar">Qatar</SelectItem>
+                <SelectItem value="oman">Oman</SelectItem>
+                <SelectItem value="uae">Unitied Arab Emirates</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>{" "}
@@ -162,6 +184,7 @@ export function Signup({
           </div>
           <Input
             id="company"
+            name="Company"
             type="text"
             required
             className="border-[#EFEFEE] rounded-[4px] h-12"

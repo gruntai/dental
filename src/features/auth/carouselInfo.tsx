@@ -19,6 +19,10 @@ const slidesContent = [
     p1: "Existing patients are sometimes unreliable, 15-20% of them miss their appointments or cancel last minute.",
     p2: "Grunt detects no shows and instantly fills gaps with your waitlist.",
   },
+  {
+    p1: "Did you know that just one missed lead or no-show per day can cost $20K–$70K annually?",
+    p2: "Most practices miss up to 60% of leads and face 15–20% no-show rates!",
+  },
 ];
 
 export function CarouselInfo() {

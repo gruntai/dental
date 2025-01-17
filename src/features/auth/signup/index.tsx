@@ -54,7 +54,7 @@ export function Signup({
       <input
         type="hidden"
         name="_next"
-        value="https://main.dwxaote8npuh8.amplifyapp.com/thank-you"
+        value="https://start.getgrunt.co/thank-you"
       />
       <input type="hidden" name="_captcha" value="false" />
 

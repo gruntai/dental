@@ -6,20 +6,40 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useRef, useState } from "react";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"form">) {
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleLogin = (e: SubmitEvent) => {
+    e.preventDefault();
+    const email = emailRef.current?.value.trim(); // Trim whitespace
+    const password = passRef.current?.value.trim();
+
+    const validEmail = "demo@getgrunt.co";
+    const validPassword = "Demo123";
+
+    if (email == validEmail && password == validPassword) {
+      localStorage.setItem("authenticated", "true"); // Store authentication flag
+      router.push("/wizard"); // Redirect to /wizard
+    } else {
+      setErrorMessage("Invalid email or password."); // Show error message
+    }
+  };
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passRef = useRef<HTMLInputElement>(null);
 
   return (
     <form
       className={cn("flex flex-col gap-6", className)}
       {...props}
       onSubmit={(e) => {
-        e.preventDefault();
-        router.push("/dashboard");
+        handleLogin(e);
       }}
     >
       <div className="flex gap-2 text-center mb-2">
@@ -36,9 +56,16 @@ export function LoginForm({
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email" className="font-semibold">
-            Email Adress
+            Email Address
           </Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input
+            ref={emailRef}
+            id="email"
+            name="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+          />
         </div>
         <div className="grid gap-2 mb-7">
           <div className="flex w-full items-center justify-between">
@@ -52,10 +79,19 @@ export function LoginForm({
               Forgot your password?
             </Link>
           </div>
-          <Input id="password" type="password" required />
+          <Input
+            id="password"
+            name="password"
+            type="password"
+            required
+            ref={passRef}
+          />
         </div>
-        <Button type="submit" className="w-full rounded-3xl h-12" asChild>
-          <Link href="/wizard">Sign in</Link>
+        {errorMessage && (
+          <p className="text-red-500 text-xs">{errorMessage}</p> // Error message displayed
+        )}
+        <Button type="submit" className="w-full rounded-3xl h-12">
+          Sign in
         </Button>
       </div>
       <div className="text-center text-sm">

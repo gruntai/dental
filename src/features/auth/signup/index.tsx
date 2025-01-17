@@ -54,7 +54,7 @@ export function Signup({
       <input
         type="hidden"
         name="_next"
-        value="https://grunt-nick.netlify.app/thank-you"
+        value="https://main.dwxaote8npuh8.amplifyapp.com/thank-you"
       />
       <input type="hidden" name="_captcha" value="false" />
 

@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 
 const slidesContent = [
   {
+    p1: "Did you know that just one missed lead or no-show per day can cost $20K–$70K annually?",
+    p2: "Most practices miss up to 60% of leads and face 15–20% no-show rates!",
+  },
+  {
     p1: "60% of new patients come from marketing, and their trust needs to be massaged. Your current appointment system can’t do that on its own.",
     p2: "Grunt is here to help with that!",
   },
@@ -18,10 +22,6 @@ const slidesContent = [
   {
     p1: "Existing patients are sometimes unreliable, 15-20% of them miss their appointments or cancel last minute.",
     p2: "Grunt detects no shows and instantly fills gaps with your waitlist.",
-  },
-  {
-    p1: "Did you know that just one missed lead or no-show per day can cost $20K–$70K annually?",
-    p2: "Most practices miss up to 60% of leads and face 15–20% no-show rates!",
   },
 ];
 

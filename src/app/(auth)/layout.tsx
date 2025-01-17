@@ -21,7 +21,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           <div className="w-full max-w-2xl 2xl:max-w-4xl">{children}</div>
         </div>
       </div>
-      <div className="relative hidden lg:block lg:w-2/5 bg-[#F5F8FF]">
+      <div className=" hidden h-screen fixed top-0 right-0 lg:block lg:w-2/5 bg-[#F5F8FF]">
         <CarouselInfo />
       </div>
     </div>

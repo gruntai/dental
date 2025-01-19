@@ -227,7 +227,7 @@ export function Signup({
                 </SelectGroup>
               </SelectContent>
             </Select>
-            <p className="opoacity-0 text-[10px] italic text-[#141417]"></p>
+            <p className="opoacity-0 text-[10px] italic text-[#141417] h-[15px]"></p>
           </div>
 
           {/* Grunt Usage */}

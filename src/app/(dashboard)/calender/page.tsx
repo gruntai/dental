@@ -31,11 +31,13 @@ type MyEvent = {
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 const today = new Date();
+// 1 - 9
+
 const workingHoursStart = new Date(
   today.getFullYear(),
   today.getMonth(),
   today.getDate(),
-  9,
+  8,
   0,
   0
 ); // 9 AM
@@ -57,11 +59,23 @@ const customFormats = {
   dayHeaderFormat: "dddd, MMMM D, YYYY",
 };
 
+const currentDate = new Date();
+console.log("currentDate", currentDate.toISOString());
+const currentDay = String(currentDate.getDate()).padStart(2, "0");
+const currentHour = currentDate.getHours();
+
+console.log(currentHour);
+console.log(`2025-01-${currentDay}T${currentHour}:00:00`);
+
+console.log(`2025-01-${currentDay}T${+currentHour + 1}:00:00`);
+
 // Example events
 const events: MyEvent[] = [
   {
-    start: moment("2025-01-12T09:00:00").toDate(),
-    end: moment("2025-01-12T10:00:00").toDate(),
+    start: moment(
+      `2025-01-${currentDay}T${String(currentHour).padStart(2, "0")}:00:00`
+    ).toDate(),
+    end: moment(`2025-01-${currentDay}T${+currentHour + 1}:00:00`).toDate(),
     title: "Event 1",
     data: {
       node: (data: any) => (
@@ -89,16 +103,30 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-12T10:30:00").toDate(),
-    end: moment("2025-01-12T11:30:00").toDate(),
+    start: moment(
+      `2025-01-${currentDay}T${String(currentHour + 1).padStart(2, "0")}:30:00`
+    ).toDate(),
+    end: moment(
+      `2025-01-${currentDay}T${String(currentHour + 2).padStart(2, "0")}:30:00`
+    ).toDate(),
     title: "Event 2",
     data: {
       node: (data) => <PotentialToShow data={data} />,
     },
   },
   {
-    start: moment("2025-01-15T10:00:00").toDate(),
-    end: moment("2025-01-15T11:00:00").toDate(),
+    start: moment(
+      `2025-01-${+currentDay + 3}T${String(currentHour + 1).padStart(
+        2,
+        "0"
+      )}:00:00`
+    ).toDate(),
+    end: moment(
+      `2025-01-${+currentDay + 3}T${String(currentHour + 2).padStart(
+        2,
+        "0"
+      )}:00:00`
+    ).toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -487,13 +515,13 @@ const MyCalendar = () => {
       indicatorWrapper.style.position = "relative";
       // Create the new div element
       const customLine = document.createElement("div");
-
+      const heightOfCell = 150;
       // Add styles to match Tailwind classes
       customLine.style.position = "absolute";
       customLine.style.height = "2px";
       customLine.style.width = "1800px";
       customLine.style.backgroundColor = "#ff6633";
-      customLine.style.top = "50px";
+      customLine.style.top = `${50 + 1 * heightOfCell}px`;
       customLine.style.zIndex = "50";
       customLine.style.left = "3px";
 

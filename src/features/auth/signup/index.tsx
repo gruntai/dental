@@ -152,7 +152,7 @@ export function Signup({
 
         <div className="grid gap-2">
           <div className="flex w-full items-center justify-between">
-            <Label htmlFor="phone" className="font-semibold text-[#141417]">
+            <Label htmlFor="Country" className="font-semibold text-[#141417]">
               Country{" "}
             </Label>
           </div>
@@ -189,6 +189,83 @@ export function Signup({
             required
             className="border-[#EFEFEE] rounded-[4px] h-12"
           />
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-10">
+          {/* Practice Size */}
+          <div className="grid gap-2 flex-1">
+            <div className="flex w-full items-center justify-between">
+              <Label
+                htmlFor="Practice_size"
+                className="font-semibold text-[#141417]"
+              >
+                Practice Size{" "}
+              </Label>
+            </div>
+            <Select required name="Practice_size">
+              <SelectTrigger className="w-full rounded-[4px] h-12">
+                <SelectValue placeholder="Select a size" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Size</SelectLabel>
+                  <SelectItem value="Less than 50 Daily Patients">
+                    Less than 50 Daily Patients
+                  </SelectItem>
+                  <SelectItem value="50–100 Daily Patients">
+                    50–100 Daily Patients
+                  </SelectItem>
+                  <SelectItem value="101–150 Daily Patients">
+                    101–150 Daily Patients
+                  </SelectItem>
+                  <SelectItem value="151–200 Daily Patients">
+                    151–200 Daily Patients
+                  </SelectItem>
+                  <SelectItem value="201+ Daily Patients">
+                    201+ Daily Patients
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <p className="opoacity-0 text-[10px] italic text-[#141417]"></p>
+          </div>
+
+          {/* Grunt Usage */}
+          <div className="grid gap-2 flex-1">
+            <div className="flex flex-col gap-1 w-full justify-between">
+              <Label
+                htmlFor="Grunt_usage"
+                className="font-semibold text-[#141417]"
+              >
+                What do you primarily plan to use Grunt for?
+              </Label>
+            </div>
+            <Select required name="Grunt_usage">
+              <SelectTrigger className="w-full rounded-[4px] h-12">
+                <SelectValue placeholder="Select an option" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Options</SelectLabel>
+                  <SelectItem value="Lead Conversion">
+                    Lead Conversion
+                  </SelectItem>
+                  <SelectItem value="Patient Retention">
+                    Patient Retention
+                  </SelectItem>
+                  <SelectItem value="Patient Nurturing">
+                    Patient Nurturing
+                  </SelectItem>
+                  <SelectItem value="No-Show Detection">
+                    No-Show Detection
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+            <p className="text-[10px] italic text-[#141417]">
+              This helps Grunt tailor its focus to your needs.
+            </p>
+          </div>
         </div>
 
         <Button type="submit" className="w-full rounded-3xl h-12">

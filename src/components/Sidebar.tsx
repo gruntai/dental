@@ -31,28 +31,28 @@ function Sidebar({
 
 const menuItems = [
   {
-    icon: "image-3.svg",
+    icon: "Image-3.svg",
     label: "Overview",
     link: "/overview",
     width: 14,
     height: 16,
   },
   {
-    icon: "image-2.svg",
+    icon: "Image-2.svg",
     label: "View Calendar",
     link: "/calendar",
     width: 16,
     height: 16,
   },
   {
-    icon: "image-1.svg",
+    icon: "Image-1.svg",
     label: "Potential No Shows",
     link: "/no-shows",
     width: 16,
     height: 16,
   },
   {
-    icon: "image.svg",
+    icon: "Image.svg",
     label: "Patient Retention",
     link: "/patient-retention",
     width: 18,

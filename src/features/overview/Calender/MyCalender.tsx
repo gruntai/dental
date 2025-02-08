@@ -37,7 +37,7 @@ const workingHoursStart = new Date(
   today.getFullYear(),
   today.getMonth(),
   today.getDate(),
-  8,
+  9,
   0,
   0
 ); // 9 AM
@@ -62,20 +62,23 @@ const customFormats = {
 const currentDate = new Date();
 console.log("currentDate", currentDate.toISOString());
 const currentDay = String(currentDate.getDate()).padStart(2, "0");
-const currentHour = currentDate.getHours();
+// const currentHour = currentDate.getHours();
+const currentHour = 9;
 
 console.log(currentHour);
-console.log(`2025-01-${currentDay}T${currentHour}:00:00`);
+console.log(`2025-02-${currentDay}T${currentHour}:00:00`);
 
-console.log(`2025-01-${currentDay}T${+currentHour + 1}:00:00`);
+console.log(
+  moment(
+    `2025-02-${currentDay}T${String(currentHour + 1).padStart(2, "0")}:30:00`
+  ).toDate()
+);
 
 // Example events
 const events: MyEvent[] = [
   {
-    start: moment(
-      `2025-01-${currentDay}T${String(currentHour).padStart(2, "0")}:00:00`
-    ).toDate(),
-    end: moment(`2025-01-${currentDay}T${+currentHour + 1}:00:00`).toDate(),
+    start: moment(`2025-02-09T09:00:00`).toDate(),
+    end: moment(`2025-02-09T${+9 + 1}:00:00`).toDate(),
     title: "Event 1",
     data: {
       node: (data: any) => (
@@ -104,10 +107,10 @@ const events: MyEvent[] = [
   },
   {
     start: moment(
-      `2025-01-${currentDay}T${String(currentHour + 1).padStart(2, "0")}:30:00`
+      `2025-02-09T${String(currentHour + 1).padStart(2, "0")}:30:00`
     ).toDate(),
     end: moment(
-      `2025-01-${currentDay}T${String(currentHour + 2).padStart(2, "0")}:30:00`
+      `2025-02-09T${String(currentHour + 2).padStart(2, "0")}:30:00`
     ).toDate(),
     title: "Event 2",
     data: {
@@ -116,13 +119,13 @@ const events: MyEvent[] = [
   },
   {
     start: moment(
-      `2025-01-${+currentDay + 3}T${String(currentHour + 1).padStart(
+      `2025-02-12T${String(currentHour + 1).padStart(
         2,
         "0"
       )}:00:00`
     ).toDate(),
     end: moment(
-      `2025-01-${+currentDay + 3}T${String(currentHour + 2).padStart(
+      `2025-02-12T${String(currentHour + 2).padStart(
         2,
         "0"
       )}:00:00`
@@ -142,8 +145,8 @@ const events: MyEvent[] = [
     },
   },
   // {
-  //   start: moment("2025-01-14T12:00:00").toDate(),
-  //   end: moment("2025-01-14T13:00:00").toDate(),
+  //   start: moment("2025-02-14T12:00:00").toDate(),
+  //   end: moment("2025-02-14T13:00:00").toDate(),
   //   title: "Event 4",
   //   data: {
   //     node: (data: any) => (
@@ -162,8 +165,8 @@ const events: MyEvent[] = [
   //   },
   // },
   {
-    start: moment("2025-01-17T11:00:00").toDate(),
-    end: moment("2025-01-17T12:00:00").toDate(),
+    start: moment(`2025-02-10T11:00:00`).toDate(),
+    end: moment(`2025-02-10T12:00:00`).toDate(),
     title: "Event 5",
     data: {
       node: (data: any) => (
@@ -187,8 +190,8 @@ const events: MyEvent[] = [
   },
   // confirmed
   {
-    start: moment("2025-01-13T09:30:00").toDate(),
-    end: moment("2025-01-13T10:30:00").toDate(),
+    start: moment("2025-02-10T09:30:00").toDate(),
+    end: moment("2025-02-10T10:30:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -204,8 +207,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-14T09:00:00").toDate(),
-    end: moment("2025-01-14T10:00:00").toDate(),
+    start: moment("2025-02-11T09:00:00").toDate(),
+    end: moment("2025-02-11T10:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -221,8 +224,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-14T10:00:00").toDate(),
-    end: moment("2025-01-14T11:00:00").toDate(),
+    start: moment("2025-02-11T10:00:00").toDate(),
+    end: moment("2025-02-11T11:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -239,8 +242,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-14T11:00:00").toDate(),
-    end: moment("2025-01-14T12:00:00").toDate(),
+    start: moment("2025-02-11T11:00:00").toDate(),
+    end: moment("2025-02-11T12:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -257,8 +260,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-14T12:00:00").toDate(),
-    end: moment("2025-01-14T13:00:00").toDate(),
+    start: moment("2025-02-11T12:00:00").toDate(),
+    end: moment("2025-02-11T13:00:00").toDate(),
     title: "Event 5",
     data: {
       node: (data: any) => (
@@ -277,8 +280,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-16T09:00:00").toDate(),
-    end: moment("2025-01-16T10:00:00").toDate(),
+    start: moment("2025-02-13T09:00:00").toDate(),
+    end: moment("2025-02-13T10:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -294,8 +297,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-16T10:00:00").toDate(),
-    end: moment("2025-01-16T11:00:00").toDate(),
+    start: moment("2025-02-13T10:00:00").toDate(),
+    end: moment("2025-02-13T11:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -311,8 +314,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-16T11:00:00").toDate(),
-    end: moment("2025-01-16T12:00:00").toDate(),
+    start: moment("2025-02-13T11:00:00").toDate(),
+    end: moment("2025-02-13T12:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -328,8 +331,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-17T09:30:00").toDate(),
-    end: moment("2025-01-17T10:30:00").toDate(),
+    start: moment("2025-02-14T09:30:00").toDate(),
+    end: moment("2025-02-14T10:30:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -345,8 +348,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-17T12:00:00").toDate(),
-    end: moment("2025-01-17T13:00:00").toDate(),
+    start: moment("2025-02-14T12:00:00").toDate(),
+    end: moment("2025-02-14T13:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -362,8 +365,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-12T11:30:00").toDate(),
-    end: moment("2025-01-12T12:30:00").toDate(),
+    start: moment("2025-02-09T11:30:00").toDate(),
+    end: moment("2025-02-09T12:30:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -379,8 +382,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-13T12:00:00").toDate(),
-    end: moment("2025-01-13T13:00:00").toDate(),
+    start: moment("2025-02-10T12:00:00").toDate(),
+    end: moment("2025-02-10T13:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -396,8 +399,8 @@ const events: MyEvent[] = [
     },
   },
   {
-    start: moment("2025-01-15T12:00:00").toDate(),
-    end: moment("2025-01-15T13:00:00").toDate(),
+    start: moment("2025-02-12T12:00:00").toDate(),
+    end: moment("2025-02-12T13:00:00").toDate(),
     title: "Event 3",
     data: {
       node: (data: any) => (
@@ -521,7 +524,7 @@ const MyCalendar = () => {
       customLine.style.height = "2px";
       customLine.style.width = "1800px";
       customLine.style.backgroundColor = "#ff6633";
-      customLine.style.top = `${50 + 1 * heightOfCell}px`;
+      customLine.style.top = `${50 + 0 * heightOfCell}px`;
       customLine.style.zIndex = "50";
       customLine.style.left = "3px";
 

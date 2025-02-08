@@ -203,6 +203,11 @@ export const columns: ColumnDef<Patient>[] = [
         </span>
       );
     },
+    sortingFn: (rowA, rowB) => {
+      const nameA = rowA.original.status.label.toLowerCase();
+      const nameB = rowB.original.status.label.toLowerCase();
+      return nameA.localeCompare(nameB);
+    },
   },
   {
     accessorKey: "nextSteps",

@@ -217,9 +217,22 @@ export const columns: ColumnDef<Patient>[] = [
         <span className="w-[80%] text-xs font-semibold text-[#A5A5A5]">
           {row.getValue("nextSteps")}
         </span>
-        <Button size={"icon"} variant={"ghost"}>
-          <Ellipsis size={20} />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <Ellipsis />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem>Start Process</DropdownMenuItem>
+            <DropdownMenuItem>Edit Instructions</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View Patient Chart</DropdownMenuItem>
+            <DropdownMenuItem>Remove Patient</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     ),
   },

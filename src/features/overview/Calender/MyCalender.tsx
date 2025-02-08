@@ -119,16 +119,10 @@ const events: MyEvent[] = [
   },
   {
     start: moment(
-      `2025-02-12T${String(currentHour + 1).padStart(
-        2,
-        "0"
-      )}:00:00`
+      `2025-02-12T${String(currentHour + 1).padStart(2, "0")}:00:00`
     ).toDate(),
     end: moment(
-      `2025-02-12T${String(currentHour + 2).padStart(
-        2,
-        "0"
-      )}:00:00`
+      `2025-02-12T${String(currentHour + 2).padStart(2, "0")}:00:00`
     ).toDate(),
     title: "Event 3",
     data: {
@@ -195,7 +189,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -212,7 +206,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -229,7 +223,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -247,7 +241,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -285,7 +279,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -302,7 +296,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -319,7 +313,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -336,7 +330,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -353,7 +347,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -370,7 +364,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -387,7 +381,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>
@@ -404,7 +398,7 @@ const events: MyEvent[] = [
     title: "Event 3",
     data: {
       node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] !opacity-10 ">
+        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
           <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
             Confirmed 2 Hours Ago
           </span>

@@ -17,7 +17,7 @@ function Sidebar({
   return (
     <aside
       className={cn(
-        "w-72 h-[calc(100%-6.25rem)] fixed left-0 top-24 mt-1 pb-10  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
+        "w-72 h-[calc(100%-6.25rem)] fixed left-0 top-24 mt-1 pb-5  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
         {
           "-translate-x-[290px]": isOpened,
           // "slide-out-to-left-[300px]": isOpened,

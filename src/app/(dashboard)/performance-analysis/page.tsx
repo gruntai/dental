@@ -1,4 +1,5 @@
 import HeaderSec from "@/components/HeaderSec";
+import RecourcesTable from "@/features/performance-analysis/Table";
 import React from "react";
 
 const statsData = [
@@ -27,7 +28,7 @@ function PerformancePage() {
         title="Grunt helped you saved $16,950 this month"
         cards={statsData}
       />
-      {/* <PatientsTable /> */}
+      <RecourcesTable />
     </div>
   );
 }

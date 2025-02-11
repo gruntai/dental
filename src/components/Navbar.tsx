@@ -1,24 +1,43 @@
 "use client";
 import React from "react";
-import { Button } from "./ui/button";
-import {
-  Bell,
-  Link,
-  Mail,
-  Menu,
-  PlayCircle,
-  Search,
-  Trash2,
-} from "lucide-react";
+import { Bell, Mail, MenuIcon, Search } from "lucide-react";
 import { Switch } from "./ui/switch";
 import Image from "next/image";
 import { Input } from "./ui/input";
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
+import { NavigationList } from "./Sidebar";
+import Link from "next/link";
 
 function Navbar() {
   const [checked, setChecked] = React.useState(true);
   return (
-    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 md:px-10 py-3 pt-5 border-b border-black">
-      <div className="flex gap-20 items-center">
+    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 lg:px-10 py-3 pt-5 border-b border-black">
+      <div className="flex gap-2 lg:gap-20 items-center">
+        <Sheet>
+          <SheetTrigger>
+            <MenuIcon size={24} />
+          </SheetTrigger>
+          <SheetContent side={"left"}>
+            <SheetHeader  className="h-full">
+              <div className="flex flex-col h-full">
+                <div className="flex-1 h-full">
+                  <NavigationList />
+                </div>
+                <Link
+                  href={"/account-settings"}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  <div className="w-11 h-11  bg-[#E8D7FE] rounded-full flex items-center justify-center text-white">
+                    SL
+                  </div>
+                  <span className="text-[#737278] text-sm font-semibold">
+                    Account Settings
+                  </span>
+                </Link>
+              </div>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
         <Image
           src="/assets/images/logos/grunt_logo.png"
           alt="grunt logo"
@@ -26,13 +45,13 @@ function Navbar() {
           height={30}
           // className="pl-5"
         />
-        <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden md:block">
+        <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden lg:block">
           <Input
             type="search"
             placeholder="Search for what you need..."
             className="outline-0 border-0"
           />
-          <Search className="absolute left-3 top-2.5" size={16}   />
+          <Search className="absolute left-3 top-2.5" size={16} />
         </div>
       </div>
       <div className="flex items-start md:items-center gap-4 md:justify-end">

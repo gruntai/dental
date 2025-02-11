@@ -213,7 +213,7 @@ export const columns: ColumnDef<Patient>[] = [
     accessorKey: "nextSteps",
     header: () => <HeaderText>Next Steps</HeaderText>,
     cell: ({ row }) => (
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between w-[250px]">
         <span className="w-[80%] text-xs font-semibold text-[#A5A5A5]">
           {row.getValue("nextSteps")}
         </span>

@@ -31,7 +31,7 @@ const filterOptions = [
   {
     id: 4,
     label: "Warnings",
-    value: "warnings",
+    value: "warning",
   },
 ];
 
@@ -137,8 +137,8 @@ function RecourcesTable() {
                   <div className="flex items-center gap-2">
                     <p className="font-semibold text-lg">{n.title}</p>
                     <p
-                      style={{ color: getStatusColor(n.status) }}
-                      className="text-white text-sm"
+                      className="text-white text-sm px-2 py-0.5 rounded-sm"
+                      style={{ backgroundColor: getStatusColor(n.status.toLowerCase()) }}
                     >
                       {n.status}
                     </p>
@@ -178,7 +178,7 @@ function getStatusColor(status: string) {
       return "#D32F2F";
     case "recommended":
       return "#2E7D32";
-    case "warnings":
+    case "warning":
       return "#FF9800";
   }
 }

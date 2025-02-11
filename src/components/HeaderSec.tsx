@@ -12,7 +12,7 @@ export function HeaderSec({
 }) {
   return (
     <div>
-      <p className="font-bold text-3xl mb-10 ">{title}</p>
+      <p className="font-bold text-2xl sm:text-3xl mb-10 ">{title}</p>
       <div className="flex flex-wrap w-full justify-between gap-y-5">
         {cards.map((card, index) => (
           <div className="w-full sm:w-[48%] md:w-[30%] lg:w-[23%]">

@@ -14,11 +14,11 @@ function Navbar() {
     <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 lg:px-10 py-3 pt-5 border-b border-black">
       <div className="flex gap-2 lg:gap-20 items-center">
         <Sheet>
-          <SheetTrigger>
+          <SheetTrigger className="block lg:hidden ">
             <MenuIcon size={24} />
           </SheetTrigger>
           <SheetContent side={"left"}>
-            <SheetHeader  className="h-full">
+            <SheetHeader className="h-full">
               <div className="flex flex-col h-full">
                 <div className="flex-1 h-full">
                   <NavigationList />
@@ -68,10 +68,10 @@ function Navbar() {
           </div>
 
           <Mail
-            className="w-[18px] h-[18px] ml-3 cursor-pointer"
+            className="w-[18px] h-[18px] ml-3 cursor-pointer hidden sm:block"
             strokeWidth={2}
           />
-          <Bell className="w-[18px] h-[18px] cursor-pointer" strokeWidth={2} />
+          <Bell className="w-[18px] h-[18px] cursor-pointer hidden sm:block" strokeWidth={2} />
         </div>
       </div>
     </nav>

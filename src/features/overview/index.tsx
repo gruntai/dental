@@ -42,7 +42,10 @@ const filterCards = [
 function Overview() {
   return (
     <div className="space-y-10 pb-20">
-      <HeaderSec title="Patient Retention Summary" cards={statsData} />
+      <HeaderSec
+        title="Grunt helped recover $30,000 this month"
+        cards={statsData}
+      />
       <FilterUi title="Filter Calender By" cards={filterCards} />
       <MyCalendar />
     </div>

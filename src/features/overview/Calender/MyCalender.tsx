@@ -482,6 +482,7 @@ const components: Components<MyEvent, object> = {
       </div>
     );
   },
+  
 };
 
 const MyCalendar = () => {

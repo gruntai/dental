@@ -17,14 +17,29 @@ function Sidebar({
   return (
     <aside
       className={cn(
-        "w-64 h-screen fixed left-0 top-24 mt-1  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
+        "w-72 h-[calc(100%-6.25rem)] fixed left-0 top-24 mt-1 pb-10  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
         {
           "-translate-x-[290px]": isOpened,
           // "slide-out-to-left-[300px]": isOpened,
         }
       )}
     >
-      <NavigationList />
+      <div className="flex flex-col h-full">
+        <div className="flex-1">
+          <NavigationList />
+        </div>
+        <Link
+          href={"/account-settings"}
+          className="flex items-center gap-2 cursor-pointer"
+        >
+          <div className="w-11 h-11  bg-[#E8D7FE] rounded-full flex items-center justify-center text-white">
+            SL
+          </div>
+          <span className="text-[#737278] text-sm font-semibold">
+            Account Settings
+          </span>
+        </Link>
+      </div>
     </aside>
   );
 }
@@ -70,6 +85,20 @@ const menuItems = [
     label: "My Patient Waitlist",
     link: "/waitlist",
   },
+  {
+    icon: "resource.svg",
+    label: "Resource Optimization",
+    link: "/resource-optimization",
+    width: 18,
+    height: 18,
+  },
+  {
+    icon: "analysis.svg",
+    label: "Peformance Analysis",
+    link: "/performance-analysis",
+    width: 18,
+    height: 18,
+  },
 ];
 export function NavigationList() {
   const pathname = usePathname();
@@ -101,7 +130,9 @@ export function NavigationList() {
                 <span className="text-[#1c110f]">{item.icon}</span>
               )}
             </div>
-            <span className={"font-bold text-sm text-[#737278]"}>{item.label}</span>
+            <span className={"font-bold text-sm text-[#737278]"}>
+              {item.label}
+            </span>
           </Link>
         );
       })}

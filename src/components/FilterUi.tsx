@@ -11,7 +11,7 @@ function FilterUi({
   }[];
 }) {
   return (
-    <div className="flex flex-col lg:flex-row  gap-5">
+    <div className="flex flex-col xl:flex-row  gap-5">
       <p className="font-semibold text-xl">{title}</p>
       <div className="flex flex-wrap gap-5">
         {cards.map((card, index) => (

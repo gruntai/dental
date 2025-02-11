@@ -17,7 +17,7 @@ import { Input } from "./ui/input";
 function Navbar() {
   const [checked, setChecked] = React.useState(true);
   return (
-    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-10 py-3 pt-5 border-b border-black">
+    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 md:px-10 py-3 pt-5 border-b border-black">
       <div className="flex gap-20 items-center">
         <Image
           src="/assets/images/logos/grunt_logo.png"
@@ -26,7 +26,7 @@ function Navbar() {
           height={30}
           // className="pl-5"
         />
-        <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm">
+        <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden md:block">
           <Input
             type="search"
             placeholder="Search for what you need..."

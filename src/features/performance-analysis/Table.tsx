@@ -42,7 +42,7 @@ const notifications = [
       "This will most likely impact your earnings this quarter. Grunt identify 23 patients that was unscheduled. You can activate your retention agent to avoid this in the future.",
     status: "Critical",
     image: {
-      src: "image-3.svg",
+      src: "Image-3.svg",
       alt: "Image 3",
       width: 23.5,
       height: 23.5,
@@ -54,7 +54,7 @@ const notifications = [
       "Grunt Inventory Agent detected an order of 25 packs of dental alginate. You have 20 in stock, enough for scheduled cases and chair capacity. Overstock may result in $300+ in waste.",
     status: "Warning",
     image: {
-      src: "image-2.svg",
+      src: "Image-2.svg",
       alt: "Image 2",
       width: 13,
       height: 19,
@@ -66,7 +66,7 @@ const notifications = [
       "Grunt detected 9 no-shows this week, resulting in a $2,918 loss. You may activate the Grunt No-Show Agent to help detect and prevent this.",
     status: "Critical",
     image: {
-      src: "image-1.svg",
+      src: "Image-1.svg",
       alt: "Image 1",
       width: 22,
       height: 17.5,
@@ -78,7 +78,7 @@ const notifications = [
       "Grunt detected 40 missed calls this week. This is an estimated $3900 in revenue. You may activate the Grunt Conversion Agent to prevent this.",
     status: "Critical",
     image: {
-      src: "image.svg",
+      src: "Image.svg",
       alt: "Image",
       width: 10,
       height: 17,

@@ -34,7 +34,7 @@ function Navbar() {
           <div className=" border-[#C5D0D3] border-[1.5px] rounded-lg h-[38px] px-2.5  flex items-center gap-2">
             <Switch
               className="h-5 w-9 data-[state=checked]:bg-green-600"
-              thumbClassName="w-4 h-4 data-[state=checked]:translate-x-4"
+              thumbClasses="w-4 h-4 data-[state=checked]:translate-x-4"
               // checked={true}
               checked={checked}
               onCheckedChange={setChecked}

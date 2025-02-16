@@ -83,7 +83,7 @@ const menuItems = [
   {
     icon: <Clock className="w-4 h-4" />,
     label: "My Patient Waitlist",
-    link: "/waitlist",
+    link: "/patient-waitlist",
   },
   {
     icon: "resource.svg",

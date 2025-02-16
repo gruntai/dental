@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { ActionDialog } from "./ActionDialog";
 
 const filterOptions = [
   {
@@ -120,7 +121,7 @@ function RecourcesTable() {
         </div>
       </div>
       <div className="px-5 md:px-7 py-5">
-        {notifications.map((n) => {
+        {notifications.map((n, idx) => {
           return (
             <div className="row flex flex-col sm:flex-row gap-3 sm:gap-10 sm:items-center mb-10 sm:mb-5 last:mb-0">
               <div className="flex flex-1 items-center gap-6">
@@ -138,7 +139,9 @@ function RecourcesTable() {
                     <p className="font-semibold text-lg">{n.title}</p>
                     <p
                       className="text-white text-sm px-2 py-0.5 rounded-sm"
-                      style={{ backgroundColor: getStatusColor(n.status.toLowerCase()) }}
+                      style={{
+                        backgroundColor: getStatusColor(n.status.toLowerCase()),
+                      }}
                     >
                       {n.status}
                     </p>
@@ -146,20 +149,23 @@ function RecourcesTable() {
                   <p className="text-[#858686]">{n.description}</p>
                 </div>
               </div>
-              <Button
-                className={cn(
+              <ActionDialog
+                buttonLabel={
+                  n.status.toLowerCase() == "warning"
+                    ? "See Details"
+                    : "Take Action"
+                }
+                actionType={
+                  n.status.toLowerCase() == "warning" ? "noShow" : "takeAction"
+                }
+                buttonClasses={cn(
                   `bg-[#28A745] hover:bg-[#28A745]/80 h-8 px-2 text-sm font-semibold`,
                   {
                     "text-[#858686] bg-white hover:bg-white border-black border":
                       n.status.toLowerCase() == "warning",
                   }
                 )}
-              >
-                {n.status.toLowerCase() == "warning"
-                  ? "See Details"
-                  : "Take Action"}
-                <ArrowRight size={10} />
-              </Button>
+              />
             </div>
           );
         })}

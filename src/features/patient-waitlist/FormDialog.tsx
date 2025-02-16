@@ -131,7 +131,6 @@ export function InputForm({
               <FormControl className="w-full ">
                 <Input
                   className="w-full"
-                  placeholder="example@grunt.com"
                   {...field}
                   type="password"
                 />

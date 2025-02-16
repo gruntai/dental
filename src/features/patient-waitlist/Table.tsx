@@ -23,6 +23,7 @@ import {
   Filter,
   Settings,
   ArrowDownAZ,
+  ArrowDown,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -148,7 +149,21 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: "addedDate",
-    header: () => <HeaderText>Added Date</HeaderText>,
+    header: () => (
+      <div className="flex items-center w-40">
+        <HeaderText>Added Date</HeaderText>
+        <Button
+          variant="ghost"
+          size={"icon"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <ChevronsUpDown />
+        </Button>
+        <Button variant="ghost" size={"icon"}>
+          <GripVertical />
+        </Button>
+      </div>
+    ),
     cell: ({ row }) => (
       <div className="text-xs text-[#A5A5A5] font-semibold">
         {row.getValue("addedDate")}
@@ -199,7 +214,21 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: "nextSteps",
-    header: () => <HeaderText>Next Steps</HeaderText>,
+    header: () => (
+      <div className="flex items-center w-40">
+        <HeaderText>Next step</HeaderText>
+        <Button
+          variant="ghost"
+          size={"icon"}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          <ArrowDown color="black" size={6} />
+        </Button>
+        <Button variant="ghost" size={"icon"}>
+          <GripVertical />
+        </Button>
+      </div>
+    ),
     cell: ({ row }) => (
       <div className="flex items-center justify-between w-[250px]">
         <span className="w-[80%] text-xs font-semibold text-[#A5A5A5]">

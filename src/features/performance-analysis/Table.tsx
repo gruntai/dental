@@ -89,6 +89,11 @@ const notifications = [
 
 function RecourcesTable() {
   const [currentStatus, setCurrentStatus] = React.useState("showAll");
+  const filteredNotifications =
+    currentStatus == "showAll"
+      ? notifications
+      : notifications.filter((n) => n.status.toLowerCase() == currentStatus);
+
   return (
     <div className="border border-black rounded-[10px] py-2">
       <div className="px-5 md:px-7 flex items-center sm:items-end gap-7 font-semibold pb-2 border-b border-black">
@@ -107,21 +112,24 @@ function RecourcesTable() {
           </DropdownMenuContent>
         </DropdownMenu>
         <div className="gap-10 items-center hidden sm:flex">
-          {filterOptions.map((option) => (
-            <span
-              key={option.id}
-              style={{ color: getStatusColor(option.value) }}
-              className={cn("cursor-pointer", {
-                "underline underline-offset-4": currentStatus == option.value,
-              })}
-            >
-              {option.label}
-            </span>
-          ))}
+          {filterOptions.map((option) => {
+            return (
+              <span
+                key={option.id}
+                style={{ color: getStatusColor(option.value) }}
+                onClick={() => setCurrentStatus(option.value)}
+                className={cn("cursor-pointer", {
+                  "underline underline-offset-4": currentStatus == option.value,
+                })}
+              >
+                {option.label}
+              </span>
+            );
+          })}
         </div>
       </div>
       <div className="px-5 md:px-7 py-5">
-        {notifications.map((n, idx) => {
+        {filteredNotifications.map((n, idx) => {
           return (
             <div className="row flex flex-col sm:flex-row gap-3 sm:gap-10 sm:items-center mb-10 sm:mb-5 last:mb-0">
               <div className="flex flex-1 items-center gap-6">

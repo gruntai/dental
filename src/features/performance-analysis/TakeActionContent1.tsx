@@ -1,9 +1,13 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
+import { CustomDialog } from "../Dialog";
+
 const selectItems = [
   { value: "7d", label: "7 Days" },
   { value: "1m", label: "1 Month" },
@@ -16,10 +20,15 @@ const features = [
   {
     icon: "mic.svg", // Placeholder for icon path
     title: "Connect with your appointment system",
-    component: () => (
-      <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] h-7">
-        Connect
-      </Button>
+    component: (
+      isLoggedin: boolean,
+      setIsloggedIn: React.Dispatch<React.SetStateAction<boolean>>
+    ) => (
+      <CustomDialog
+        isLoggedin={isLoggedin}
+        setIsloggedIn={setIsloggedIn}
+        title="Connect with your appointment system"
+      />
     ),
     width: "14",
     height: "16",
@@ -27,20 +36,49 @@ const features = [
   {
     icon: "phone.svg", // Placeholder for icon path
     title: "Enable same emergency appointments",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "11",
     height: "16",
   },
   {
     icon: "mail.svg", // Placeholder for icon path
     title: "Grunt should take over after how many calls?",
-    component: () => <SelectComp data={selectItems} />,
+    component: (
+      _,
+      setIsSelectValueChanged: React.Dispatch<React.SetStateAction<boolean>>
+    ) => (
+      <SelectComp data={selectItems} checkIsChanged={setIsSelectValueChanged} />
+    ),
     width: "16",
     height: "11",
   },
 ];
 
-function TakeActionContent1() {
+const defaultValues = {
+  isConnected: false,
+  isChecked: false,
+};
+
+function TakeActionContent1({
+  setIsSaveBtnDisabled,
+}: {
+  setIsSaveBtnDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [isConnected, setIsConnected] = React.useState(false);
+  const [isChecked, setIsChecked] = React.useState(false);
+  const [isSelectValueChanged, setIsSelectValueChanged] = React.useState(false);
+
+  useEffect(() => {
+    if (isConnected || isChecked || isSelectValueChanged) {
+      setIsSaveBtnDisabled(false);
+    } else {
+      setIsSaveBtnDisabled(true);
+    }
+  }, [isConnected, isChecked, isSelectValueChanged]);
+
   return (
     <div>
       <div className="mb-8">
@@ -53,9 +91,9 @@ function TakeActionContent1() {
       </div>
       <div className="space-y-5 mb-5">
         {features.map((feature, index) => (
-          <div className="flex items-center  justify-between">
-            <div key={index} className="flex items-center gap-5">
-              <div className="w-5 h-5 flex items-center justify-center ">
+          <div className="flex items-center justify-between" key={index}>
+            <div className="flex items-center gap-5">
+              <div className="w-5 h-5 flex items-center justify-center">
                 <Image
                   src={`/assets/images/icons/${feature.icon}`}
                   alt={feature.title}
@@ -67,7 +105,20 @@ function TakeActionContent1() {
                 {feature.title}
               </p>
             </div>
-            {feature.component()}
+            {typeof feature.component === "function"
+              ? feature.component(
+                  index === 0
+                    ? isConnected
+                    : index === 1
+                    ? isChecked
+                    : isSelectValueChanged,
+                  index === 0
+                    ? setIsConnected
+                    : index === 1
+                    ? setIsChecked
+                    : setIsSelectValueChanged
+                )
+              : feature.component}
           </div>
         ))}
       </div>
@@ -75,7 +126,7 @@ function TakeActionContent1() {
         <p className="text-[#545454] text-lg font-semibold">
           Test how it works
         </p>
-        <div className="bg-[#F6F7FD] p-5 flex items-center  gap-5">
+        <div className="bg-[#F6F7FD] p-5 flex items-center gap-5">
           <Image
             alt="bitcoin logo"
             src="/assets/images/bitcoin.svg"
@@ -87,8 +138,11 @@ function TakeActionContent1() {
               Enter your number and select a communication method
             </p>
             <div className="flex flex-wrap gap-3 items-center">
-              <Input className="h-8 border-black w-full sm:w-40" placeholder="+1" />
-              <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px]  h-8 w-full sm:w-fit">
+              <Input
+                className="h-8 border-black w-full sm:w-40"
+                placeholder="+1"
+              />
+              <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] h-8 w-full sm:w-fit">
                 Call
               </Button>
               <Button

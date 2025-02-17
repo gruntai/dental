@@ -26,6 +26,8 @@ export function ActionDialog({
 }: IActionDialog) {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isSaveBtnDisabled, setIsSaveBtnDisabled] = React.useState(true);
+
   function handleSave() {
     setIsLoading(true);
     setTimeout(() => {
@@ -42,7 +44,11 @@ export function ActionDialog({
         </Button>
       </DialogTrigger>
       <DialogContent className="">
-        {actionType == "noShow" ? <NoShow /> : <TakeActionContent1 />}
+        {actionType == "noShow" ? (
+          <NoShow setIsSaveBtnDisabled={setIsSaveBtnDisabled} />
+        ) : (
+          <TakeActionContent1 setIsSaveBtnDisabled={setIsSaveBtnDisabled} />
+        )}
         <hr className="mt-3 mb-2" />
 
         <DialogFooter>
@@ -53,9 +59,9 @@ export function ActionDialog({
             Cancel{" "}
           </Button>
           <Button
-            className="bg-[#8AA9FE] hover:bg-[#9AB3F2] disabled:bg-[#9AB3F2]/70 text-sm font-semibold rounded-3xl h-[50px] px-8   mb-5 sm:mb-0"
+            className="bg-[#0052ff] hover:bg-[#0052ff]/80 disabled:bg-[#9AB3F2] text-sm font-semibold rounded-3xl h-[50px] px-8   mb-5 sm:mb-0"
             onClick={handleSave}
-            disabled={isLoading}
+            disabled={isLoading || isSaveBtnDisabled}
           >
             Save changes{" "}
           </Button>

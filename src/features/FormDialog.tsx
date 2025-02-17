@@ -17,7 +17,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SelectComp from "./Select";
+import SelectComp from "./patient-waitlist/Select";
 
 export function FormDialog({
   isLoggedin,
@@ -42,7 +42,7 @@ export function FormDialog({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          className="bg-[#8AA9FE] hover:bg-[#9AB3F2] disabled:bg-[#9AB3F2]/70 text-sm font-semibold rounded-3xl h-[50px] px-8  mb-5 sm:mb-0"
+          className="bg-[#0052ff] hover:bg-[#0052ff]/80 disabled:bg-[#9AB3F2]  text-sm font-semibold rounded-3xl h-[50px] px-8  mb-5 sm:mb-0"
           onClick={handleSave}
           disabled={isLoading}
         >
@@ -129,11 +129,7 @@ export function InputForm({
             <FormItem className="w-full ">
               <FormLabel>Password</FormLabel>
               <FormControl className="w-full ">
-                <Input
-                  className="w-full"
-                  {...field}
-                  type="password"
-                />
+                <Input className="w-full" {...field} type="password" />
               </FormControl>
               <FormMessage />
             </FormItem>

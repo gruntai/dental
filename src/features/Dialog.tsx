@@ -8,15 +8,21 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import SelectComp from "./Select";
+import SelectComp from "./patient-waitlist/Select";
 import { FormDialog } from "./FormDialog";
 import { cn } from "@/lib/utils";
 
 export function CustomDialog({
   isLoggedin,
   setIsloggedIn,
+  buttonLabel = "",
+  title = "",
+  subtitle = "",
 }: {
+  title: string;
+  subtitle?: string;
   isLoggedin: boolean;
+  buttonLabel?: string;
   setIsloggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -48,7 +54,7 @@ export function CustomDialog({
             )}
             disabled={isLoading}
           >
-            Disconnect Waitlist
+            Disconnect {buttonLabel}
           </Button>
         )}
         {!isLoggedin && (
@@ -58,18 +64,14 @@ export function CustomDialog({
                 "bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] sm:h-7 w-full sm:w-fit"
               }
             >
-              Connect Waitlist
+              Connect {buttonLabel}
             </Button>
           </DialogTrigger>
         )}
         <DialogContent className="">
           <div className="mb-5">
-            <p className="text-[#606060] font-semibold text-lg">
-              Connect with your practice management system{" "}
-            </p>
-            <p className="text-[#A2A3A7] text-sm font-semibold">
-              Where do you keep your patient waitlist?{" "}
-            </p>
+            <p className="text-[#606060] font-semibold text-lg">{title} </p>
+            <p className="text-[#A2A3A7] text-sm font-semibold">{subtitle} </p>
           </div>
           <SelectComp />
           <DialogFooter className="mt-10">

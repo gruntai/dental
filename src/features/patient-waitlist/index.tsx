@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { CustomDialog } from "./Dialog";
+import { CustomDialog } from "../Dialog";
 import { MYTable } from "./Table";
 
 function Waitlist() {
@@ -13,7 +13,13 @@ function Waitlist() {
         <p className="font-bold text-2xl sm:text-3xl  w-full sm:w-fit">
           Patient Waitlist
         </p>
-        <CustomDialog isLoggedin={isloggedIn} setIsloggedIn={setIsloggedIn} />
+        <CustomDialog
+          isLoggedin={isloggedIn}
+          setIsloggedIn={setIsloggedIn}
+          buttonLabel="Waitlist"
+          title="Connect with your practice management system"
+          subtitle="Where do you keep your patient waitlist?"
+        />
         {isloggedIn && <MYTable />}
       </div>
     </>

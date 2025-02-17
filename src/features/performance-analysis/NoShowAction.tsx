@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
+import { CustomDialog } from "../Dialog";
 
 const selectItems = [
   { value: "7d", label: "7 Days" },
@@ -19,14 +20,20 @@ const selectItems2 = [
   { value: "20", label: "20" },
   // Add more items as needed
 ];
+
 const features = [
   {
     icon: "mic.svg", // Placeholder for icon path
     title: "Connect with your appointment system",
-    component: () => (
-      <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] h-7">
-        Connect
-      </Button>
+    component: (
+      isLoggedin: boolean,
+      setIsloggedIn: React.Dispatch<React.SetStateAction<boolean>>
+    ) => (
+      <CustomDialog
+        isLoggedin={isLoggedin}
+        setIsloggedIn={setIsloggedIn}
+        title="Connect with your appointment system"
+      />
     ),
     width: "14",
     height: "16",
@@ -34,49 +41,98 @@ const features = [
   {
     icon: "phone.svg", // Placeholder for icon path
     title: "Engage with patient via SMS and Calls.",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "11",
     height: "16",
   },
   {
     icon: "mail.svg", // Placeholder for icon path
     title: "Automatically swap patient if no response.",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "16",
     height: "11",
   },
   {
     icon: "mail.svg", // Placeholder for icon path
     title: "How many attempts before swapping patient?",
-    component: () => <SelectComp data={selectItems2} />,
+    component: (
+      _: any,
+      setIsSelectValueChanged: React.Dispatch<React.SetStateAction<boolean>>
+    ) => (
+      <SelectComp
+        data={selectItems2}
+        checkIsChanged={setIsSelectValueChanged}
+      />
+    ),
     width: "16",
     height: "11",
   },
   {
     icon: "mail.svg", // Placeholder for icon path
     title: "Call patients how many days before their appointment?",
-    component: () => <SelectComp data={selectItems} />,
+    component: (
+      _: any,
+      setIsSelectValueChanged: React.Dispatch<React.SetStateAction<boolean>>
+    ) => (
+      <SelectComp data={selectItems} checkIsChanged={setIsSelectValueChanged} />
+    ),
     width: "16",
     height: "11",
   },
 ];
 
-export function NoShow() {
+export function NoShow({
+  setIsSaveBtnDisabled,
+}: {
+  setIsSaveBtnDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [isConnected, setIsConnected] = useState(false);
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isSelectValueChanged1, setIsSelectValueChanged1] = useState(false);
+  const [isSelectValueChanged2, setIsSelectValueChanged2] = useState(false);
+
+  useEffect(() => {
+    if (
+      isConnected ||
+      isChecked1 ||
+      isChecked2 ||
+      isSelectValueChanged1 ||
+      isSelectValueChanged2
+    ) {
+      setIsSaveBtnDisabled(false);
+    } else {
+      setIsSaveBtnDisabled(true);
+    }
+  }, [
+    isConnected,
+    isChecked1,
+    isChecked2,
+    isSelectValueChanged1,
+    isSelectValueChanged2,
+  ]);
+
   return (
     <div>
       <div className="mb-8">
         <p className="text-[#606060] font-semibold text-lg">
-          Turn on Automatic No Show Detection{" "}
+          Turn on Automatic No Show Detection
         </p>
         <p className="text-[#A2A3A7] text-sm font-semibold">
-          Give Grunt the permissions to detect no shows.{" "}
+          Give Grunt the permissions to detect no shows.
         </p>
       </div>
       <div className="space-y-7 mb-5">
         {features.map((feature, index) => (
-          <div className="flex items-center  justify-between">
-            <div key={index} className="flex items-center gap-5">
-              <div className="w-5 h-5 flex items-center justify-center ">
+          <div className="flex items-center justify-between" key={index}>
+            <div className="flex items-center gap-5">
+              <div className="w-5 h-5 flex items-center justify-center">
                 <Image
                   src={`/assets/images/icons/${feature.icon}`}
                   alt={feature.title}
@@ -88,7 +144,28 @@ export function NoShow() {
                 {feature.title}
               </p>
             </div>
-            {feature.component()}
+            {typeof feature.component === "function"
+              ? feature.component(
+                  index === 0
+                    ? isConnected
+                    : index === 1 || index === 2
+                    ? index === 1
+                      ? isChecked1
+                      : isChecked2
+                    : index === 3
+                    ? isSelectValueChanged1
+                    : isSelectValueChanged2,
+                  index === 0
+                    ? setIsConnected
+                    : index === 1
+                    ? setIsChecked1
+                    : index === 2
+                    ? setIsChecked2
+                    : index === 3
+                    ? setIsSelectValueChanged1
+                    : setIsSelectValueChanged2
+                )
+              : feature.component}
           </div>
         ))}
       </div>

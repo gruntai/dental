@@ -85,6 +85,11 @@ export function CustomDialog({
               isLoggedin={isLoggedin}
               setIsloggedIn={setIsloggedIn}
               closeMainModal={() => setOpen(false)}
+              subTitle={
+                buttonLabel == "Waitlist"
+                  ? "connect to your waitlist"
+                  : title.toLowerCase()
+              }
             />
           </DialogFooter>
         </DialogContent>

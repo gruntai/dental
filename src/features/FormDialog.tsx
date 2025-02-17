@@ -23,10 +23,12 @@ export function FormDialog({
   isLoggedin,
   setIsloggedIn,
   closeMainModal,
+  subTitle = "",
 }: {
   isLoggedin: boolean;
   setIsloggedIn: React.Dispatch<React.SetStateAction<boolean>>;
   closeMainModal: () => void;
+  subTitle?: string;
 }) {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -52,7 +54,7 @@ export function FormDialog({
       <DialogContent className="">
         <div>
           <p className="text-[#606060] font-semibold text-lg">Sign in </p>
-          <p className="text-[#A2A3A7] text-xs">Sign to connect waitlist </p>
+          <p className="text-[#A2A3A7] text-xs">Sign to {subTitle} </p>
         </div>
         <InputForm
           isLoggedin={isLoggedin}

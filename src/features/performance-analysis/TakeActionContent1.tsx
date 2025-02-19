@@ -93,7 +93,7 @@ function TakeActionContent1({
       </div>
       <div className="space-y-5 mb-5">
         {features.map((feature, index) => (
-          <div className="flex items-center justify-between" key={index}>
+          <div className="flex items-center gap-5 justify-between" key={index}>
             <div className="flex items-center gap-5">
               <div className="w-5 h-5 flex items-center justify-center">
                 {typeof feature.icon == "string" ? (

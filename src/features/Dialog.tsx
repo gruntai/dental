@@ -50,7 +50,10 @@ export function CustomDialog({
               }, 2000);
             }}
             className={cn(
-              "bg-[#D32F2F] hover:bg-[#D32F2F]/80 rounded-[5px] sm:h-7 w-full sm:w-fit disabled:bg-[#D32F2F]/50"
+              "bg-[#D32F2F] hover:bg-[#D32F2F]/80 rounded-[5px] sm:h-7 w-full sm:w-fit disabled:bg-[#D32F2F]/50",
+              {
+                "w-full sm:w-fit": buttonLabel == "Waitlist",
+              }
             )}
             disabled={isLoading}
           >
@@ -60,9 +63,12 @@ export function CustomDialog({
         {!isLoggedin && (
           <DialogTrigger asChild>
             <Button
-              className={
-                "bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] sm:h-7 w-full sm:w-fit"
-              }
+              className={cn(
+                "bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] sm:h-7 sm:w-fit",
+                {
+                  "w-full sm:w-fit": buttonLabel == "Waitlist",
+                }
+              )}
             >
               Connect {buttonLabel}
             </Button>

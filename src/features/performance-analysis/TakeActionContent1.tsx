@@ -7,6 +7,7 @@ import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
 import { CustomDialog } from "../Dialog";
+import { AlarmClock, Ambulance, CalendarRangeIcon } from "lucide-react";
 
 const selectItems = [
   { value: "7d", label: "7 Days" },
@@ -18,7 +19,7 @@ const selectItems = [
 
 const features = [
   {
-    icon: "mic.svg", // Placeholder for icon path
+    icon: <CalendarRangeIcon />, // Placeholder for icon path
     title: "Connect with your appointment system",
     component: (
       isLoggedin: boolean,
@@ -34,17 +35,17 @@ const features = [
     height: "16",
   },
   {
-    icon: "phone.svg", // Placeholder for icon path
+    icon: <Ambulance />, // Placeholder for icon path
     title: "Enable same emergency appointments",
     component: (
       isChecked: boolean,
       setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
     ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
-    width: "11",
+    width: "13",
     height: "16",
   },
   {
-    icon: "mail.svg", // Placeholder for icon path
+    icon: <AlarmClock />, // Placeholder for icon path
     title: "Grunt should take over after how many calls?",
     component: (
       _,
@@ -78,6 +79,7 @@ function TakeActionContent1({
       setIsSaveBtnDisabled(true);
     }
   }, [isConnected, isChecked, isSelectValueChanged]);
+  console.log("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
 
   return (
     <div>
@@ -94,12 +96,16 @@ function TakeActionContent1({
           <div className="flex items-center justify-between" key={index}>
             <div className="flex items-center gap-5">
               <div className="w-5 h-5 flex items-center justify-center">
-                <Image
-                  src={`/assets/images/icons/${feature.icon}`}
-                  alt={feature.title}
-                  width={+feature.width}
-                  height={+feature.height}
-                />
+                {typeof feature.icon == "string" ? (
+                  <Image
+                    src={`/assets/images/icons/${feature.icon}`}
+                    alt={feature.title}
+                    width={+feature.width}
+                    height={+feature.height}
+                  />
+                ) : (
+                  feature.icon
+                )}
               </div>
               <p className="text-sm text-[#7D7D7D] font-semibold">
                 {feature.title}

@@ -5,6 +5,7 @@ import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
 import { CustomDialog } from "../Dialog";
+import { AlarmClock, CalendarRange, RefreshCw } from "lucide-react";
 
 const selectItems = [
   { value: "7d", label: "7 Days" },
@@ -23,7 +24,7 @@ const selectItems2 = [
 
 const features = [
   {
-    icon: "mic.svg", // Placeholder for icon path
+    icon: <CalendarRange />, // Placeholder for icon path
     title: "Connect with your appointment system",
     component: (
       isLoggedin: boolean,
@@ -45,21 +46,21 @@ const features = [
       isChecked: boolean,
       setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
     ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
-    width: "11",
+    width: "13",
     height: "16",
   },
   {
-    icon: "mail.svg", // Placeholder for icon path
+    icon: <RefreshCw />, // Placeholder for icon path
     title: "Automatically swap patient if no response.",
     component: (
       isChecked: boolean,
       setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
     ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
-    width: "16",
+    width: "20",
     height: "11",
   },
   {
-    icon: "mail.svg", // Placeholder for icon path
+    icon: "mic.svg", // Placeholder for icon path
     title: "How many attempts before swapping patient?",
     component: (
       _: any,
@@ -74,7 +75,7 @@ const features = [
     height: "11",
   },
   {
-    icon: "mail.svg", // Placeholder for icon path
+    icon: <AlarmClock />, // Placeholder for icon path
     title: "Call patients how many days before their appointment?",
     component: (
       _: any,
@@ -133,12 +134,16 @@ export function NoShow({
           <div className="flex items-center justify-between" key={index}>
             <div className="flex items-center gap-5">
               <div className="w-5 h-5 flex items-center justify-center">
-                <Image
-                  src={`/assets/images/icons/${feature.icon}`}
-                  alt={feature.title}
-                  width={+feature.width}
-                  height={+feature.height}
-                />
+                {typeof feature.icon === "string" ? (
+                  <Image
+                    src={`/assets/images/icons/${feature.icon}`}
+                    alt={feature.title}
+                    width={+feature.width}
+                    height={+feature.height}
+                  />
+                ) : (
+                  feature.icon
+                )}
               </div>
               <p className="text-sm text-[#7D7D7D] font-semibold">
                 {feature.title}

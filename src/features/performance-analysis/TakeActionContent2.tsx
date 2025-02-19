@@ -4,10 +4,11 @@ import React, { useEffect } from "react";
 import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
+import { Bot, CalendarRange } from "lucide-react";
 
 const features = [
   {
-    icon: "mic.svg", // Placeholder for icon path
+    icon: <Bot />, // Placeholder for icon path
     title: "Grunt human-like agents will call patients.",
     component: (
       isChecked: boolean,
@@ -71,12 +72,16 @@ function TakeActionContent2({
           <div className="flex items-center justify-between" key={index}>
             <div className="flex items-center gap-5">
               <div className="w-5 h-5 flex items-center justify-center">
-                <Image
-                  src={`/assets/images/icons/${feature.icon}`}
-                  alt={feature.title}
-                  width={+feature.width}
-                  height={+feature.height}
-                />
+                {typeof feature.icon == "string" ? (
+                  <Image
+                    src={`/assets/images/icons/${feature.icon}`}
+                    alt={feature.title}
+                    width={+feature.width}
+                    height={+feature.height}
+                  />
+                ) : (
+                  feature.icon
+                )}
               </div>
               <p className="text-sm text-[#7D7D7D] font-semibold">
                 {feature.title}

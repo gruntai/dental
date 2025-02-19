@@ -8,7 +8,7 @@ const statsData = [
     stat: "$7,680",
   },
   {
-    title: "Reduction Is Waste",
+    title: "Reduction In Waste",
     stat: "$9,270",
   },
   {

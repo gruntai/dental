@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 import { SwitchComp } from "./Switch";
 import SelectComp from "./Select";
 import { Input } from "@/components/ui/input";
@@ -9,42 +9,68 @@ const features = [
   {
     icon: "mic.svg", // Placeholder for icon path
     title: "Grunt human-like agents will call patients.",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "14",
     height: "16",
   },
   {
     icon: "phone.svg", // Placeholder for icon path
     title: "Engage in text conversations with patients.",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "11",
     height: "16",
   },
   {
     icon: "mail.svg", // Placeholder for icon path
     title: "Allow Grunt to email patients.",
-    component: () => <SwitchComp />,
+    component: (
+      isChecked: boolean,
+      setIsChecked: React.Dispatch<React.SetStateAction<boolean>>
+    ) => <SwitchComp isChecked={isChecked} setIsChecked={setIsChecked} />,
     width: "16",
     height: "11",
   },
 ];
 
-function TakeActionContent2() {
+function TakeActionContent2({
+  setIsSaveBtnDisabled,
+}: {
+  setIsSaveBtnDisabled: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const [isCallChecked, setIsCallChecked] = React.useState(false);
+  const [isTextChecked, setIsTextChecked] = React.useState(false);
+  const [isEmailChecked, setIsEmailChecked] = React.useState(false);
+
+  // Enable the save button if any of the switches are toggled
+  useEffect(() => {
+    if (isCallChecked || isTextChecked || isEmailChecked) {
+      setIsSaveBtnDisabled(false);
+    } else {
+      setIsSaveBtnDisabled(true);
+    }
+  }, [isCallChecked, isTextChecked, isEmailChecked]);
+
   return (
     <div>
       <div className="mb-8">
         <p className="text-[#606060] font-semibold text-lg">
-          Turn on Automatic Patient Scheduling{" "}
+          Turn on Automatic Patient Scheduling
         </p>
         <p className="text-[#A2A3A7] text-sm font-semibold">
-          Don’t miss another call! Give Grunt permission to schedule patients.{" "}
+          Don’t miss another call! Give Grunt permission to schedule patients.
         </p>
       </div>
       <div className="space-y-7 mb-5">
         {features.map((feature, index) => (
-          <div className="flex items-center  justify-between">
-            <div key={index} className="flex items-center gap-5">
-              <div className="w-5 h-5 flex items-center justify-center ">
+          <div className="flex items-center justify-between" key={index}>
+            <div className="flex items-center gap-5">
+              <div className="w-5 h-5 flex items-center justify-center">
                 <Image
                   src={`/assets/images/icons/${feature.icon}`}
                   alt={feature.title}
@@ -56,7 +82,18 @@ function TakeActionContent2() {
                 {feature.title}
               </p>
             </div>
-            {feature.component()}
+            {feature.component(
+              index === 0
+                ? isCallChecked
+                : index === 1
+                ? isTextChecked
+                : isEmailChecked,
+              index === 0
+                ? setIsCallChecked
+                : index === 1
+                ? setIsTextChecked
+                : setIsEmailChecked
+            )}
           </div>
         ))}
       </div>
@@ -64,7 +101,7 @@ function TakeActionContent2() {
         <p className="text-[#545454] text-lg font-semibold">
           Test how it works
         </p>
-        <div className="bg-[#F6F7FD] p-5 flex items-center  gap-5">
+        <div className="bg-[#F6F7FD] p-5 flex items-center gap-5">
           <Image
             alt="bitcoin logo"
             src="/assets/images/bitcoin.svg"
@@ -76,8 +113,11 @@ function TakeActionContent2() {
               Enter your number and select a communication method
             </p>
             <div className="flex flex-wrap gap-3 items-center">
-              <Input className="h-8 border-black w-full sm:w-40" placeholder="+1" />
-              <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px]  h-8 w-full sm:w-fit">
+              <Input
+                className="h-8 border-black w-full sm:w-40"
+                placeholder="+1"
+              />
+              <Button className="bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] h-8 w-full sm:w-fit">
                 Call
               </Button>
               <Button

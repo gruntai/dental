@@ -48,6 +48,7 @@ const notifications = [
       width: 23.5,
       height: 23.5,
     },
+    actionType: "takeAction",
   },
   {
     title: "Over-ordering detected",
@@ -60,6 +61,7 @@ const notifications = [
       width: 13,
       height: 19,
     },
+    actionType: "takeAction",
   },
   {
     title: "No-show rates increasing",
@@ -72,6 +74,7 @@ const notifications = [
       width: 22,
       height: 17.5,
     },
+    actionType: "noShow",
   },
   {
     title: "40 missed calls this week",
@@ -84,6 +87,7 @@ const notifications = [
       width: 10,
       height: 17,
     },
+    actionType: "missed",
   },
 ];
 
@@ -163,9 +167,7 @@ function RecourcesTable() {
                     ? "See Details"
                     : "Take Action"
                 }
-                actionType={
-                  n.status.toLowerCase() == "warning" ? "noShow" : "takeAction"
-                }
+                actionType={n.actionType}
                 buttonClasses={cn(
                   `bg-[#28A745] hover:bg-[#28A745]/80 h-8 px-2 text-sm font-semibold`,
                   {

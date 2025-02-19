@@ -16,7 +16,7 @@ import NoShow from "./NoShowAction";
 interface IActionDialog {
   buttonLabel: string;
   buttonClasses?: string;
-  actionType: "takeAction" | "noShow";
+  actionType: string;
 }
 
 export function ActionDialog({
@@ -46,8 +46,10 @@ export function ActionDialog({
       <DialogContent className="">
         {actionType == "noShow" ? (
           <NoShow setIsSaveBtnDisabled={setIsSaveBtnDisabled} />
-        ) : (
+        ) : actionType == "missed" ? (
           <TakeActionContent1 setIsSaveBtnDisabled={setIsSaveBtnDisabled} />
+        ) : (
+          <TakeActionContent2 setIsSaveBtnDisabled={setIsSaveBtnDisabled} />
         )}
         <hr className="mt-3 mb-2" />
 

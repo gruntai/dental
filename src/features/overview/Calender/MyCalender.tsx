@@ -18,6 +18,7 @@ import { ReactNode, useEffect, useState } from "react";
 import PotentialToShow from "./potiential-to-show";
 import TimeSlot from "./timeslot";
 import Provider from "./provider";
+import FilterUi from "@/components/FilterUi";
 
 // Define the event type
 type MyEvent = {
@@ -75,341 +76,390 @@ console.log(
 );
 
 // Example events
-const events: MyEvent[] = [
-  {
-    start: moment(`2025-02-09T09:00:00`).toDate(),
-    end: moment(`2025-02-09T${+9 + 1}:00:00`).toDate(),
-    title: "Event 1",
-    data: {
-      node: (data: any) => (
-        <div className="relative flex h-full w-full z-10 ">
-          {/* line */}
-          {/* <div className="absolute h-0.5 w-full bg-[#ff6633] top-10 custom-line"></div> */}
-          {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fffcf5] opacity-50"></span>{" "} */}
-          <div className="border-[3px] border-[#ffcb34] rounded-md px-2 py-3 w-full h-full bg-[#fffcf5]">
-            <span className="bg-[#ffcb34] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-              ONGOING
+function getEvents(hasNoShows?: boolean) {
+  const events: MyEvent[] = [
+    {
+      start: moment("2025-01-12T09:00:00").toDate(),
+      end: moment("2025-01-12T10:00:00").toDate(),
+      title: "Event 1",
+      data: {
+        node: (data: any) => (
+          <div className="relative flex h-full w-full z-10 ">
+            {/* line */}
+            <div
+              className={`border-[3px] border-[#ffcb34] rounded-md px-2 py-3 w-full h-full bg-[#fffcf5]`}
+            >
+              <span className="bg-[#ffcb34] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+                ONGOING
+              </span>
+              <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+                {moment(data.event.start).format("h:mm a")} Nejat Murad
+              </p>
+              <Image
+                src="/assets/images/avatar.png"
+                width={30}
+                height={30}
+                alt="avatar image"
+                className="rounded-lg"
+              />
+            </div>
+          </div>
+        ),
+      },
+    },
+    {
+      start: moment("2025-01-12T10:30:00").toDate(),
+      end: moment("2025-01-12T11:30:00").toDate(),
+      title: "Event 2",
+      data: {
+        node: (data) => <PotentialToShow data={data} />,
+      },
+    },
+    {
+      start: moment("2025-01-15T10:00:00").toDate(),
+      end: moment("2025-01-15T11:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing`}
+          >
+            <span className="bg-[#cc7428] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              LAST MINUTE CANCELLATION
             </span>
             <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-              {moment(data.event.start).format("h:mm a")} Nejat Murad
+              {moment(data.event.start).format("h:mm a")} Noora Knight
             </p>
-            <Image
-              src="/assets/images/avatar.png"
-              width={30}
-              height={30}
-              alt="avatar image"
-              className="rounded-lg"
-            />
           </div>
-        </div>
-      ),
+        ),
+      },
     },
-  },
-  {
-    start: moment(
-      `2025-02-09T${String(currentHour + 1).padStart(2, "0")}:30:00`
-    ).toDate(),
-    end: moment(
-      `2025-02-09T${String(currentHour + 2).padStart(2, "0")}:30:00`
-    ).toDate(),
-    title: "Event 2",
-    data: {
-      node: (data) => <PotentialToShow data={data} />,
+    // {
+    //   start: moment("2025-01-14T12:00:00").toDate(),
+    //   end: moment("2025-01-14T13:00:00").toDate(),
+    //   title: "Event 4",
+    //   data: {
+    //     node: (data: any) => (
+    //       <div className="relative flex h-full w-full animate-pulse-ongoing">
+    //         {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
+    //         <div className={`border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]`}>
+    //           <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+    //             POTENTIAL NO SHOW
+    //           </span>
+    //           <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+    //             {moment(data.event.start).format("h:mm a")} Sonya Jess
+    //           </p>
+    //         </div>
+    //       </div>
+    //     ),
+    //   },
+    // },
+    {
+      start: moment("2025-01-17T11:00:00").toDate(),
+      end: moment("2025-01-17T12:00:00").toDate(),
+      title: "Event 5",
+      data: {
+        node: (data: any) => (
+          <div className="relative flex h-full w-full animate-pulse-ongoing">
+            {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
+            <div
+              className={`border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]`}
+            >
+              <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+                POTENTIAL NO SHOW
+              </span>
+              <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+                {moment(data.event.start).format("h:mm a")} Josie Fell
+              </p>
+              <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-[#1C1F23]">
+                Contact customer via call and text until 11 AM --&gt;If no
+                response offer spot to other customers
+              </p>
+            </div>
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment(
-      `2025-02-12T${String(currentHour + 1).padStart(2, "0")}:00:00`
-    ).toDate(),
-    end: moment(
-      `2025-02-12T${String(currentHour + 2).padStart(2, "0")}:00:00`
-    ).toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#cc7428] rounded-md px-2 py-3 h-full bg-[#fffcf5] animate-pulse-ongoing ">
-          <span className="bg-[#cc7428] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            LAST MINUTE CANCELLATION
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Noora Knight
-          </p>
-        </div>
-      ),
-    },
-  },
-  // {
-  //   start: moment("2025-02-14T12:00:00").toDate(),
-  //   end: moment("2025-02-14T13:00:00").toDate(),
-  //   title: "Event 4",
-  //   data: {
-  //     node: (data: any) => (
-  //       <div className="relative flex h-full w-full animate-pulse-ongoing">
-  //         {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
-  //         <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
-  //           <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-  //             POTENTIAL NO SHOW
-  //           </span>
-  //           <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-  //             {moment(data.event.start).format("h:mm a")} Sonya Jess
-  //           </p>
-  //         </div>
-  //       </div>
-  //     ),
-  //   },
-  // },
-  {
-    start: moment(`2025-02-10T11:00:00`).toDate(),
-    end: moment(`2025-02-10T12:00:00`).toDate(),
-    title: "Event 5",
-    data: {
-      node: (data: any) => (
-        <div className="relative flex h-full w-full animate-pulse-ongoing">
-          {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
-          <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
-            <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-              POTENTIAL NO SHOW
+    // confirmed
+    {
+      start: moment("2025-01-13T09:30:00").toDate(),
+      end: moment("2025-01-13T10:30:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
             </span>
             <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-              {moment(data.event.start).format("h:mm a")} Josie Fell
-            </p>
-            <p className="bg-white p-2 rounded-lg border border-dashed border-[#ADB5BD] text-[10px] text-[#1C1F23]">
-              Contact customer via call and text until 11 AM --&gt;If no
-              response offer spot to other customers
+              {moment(data.event.start).format("h:mm a")} Layla Brown
             </p>
           </div>
-        </div>
-      ),
+        ),
+      },
     },
-  },
-  // confirmed
-  {
-    start: moment("2025-02-10T09:30:00").toDate(),
-    end: moment("2025-02-10T10:30:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Layla Brown
-          </p>
-        </div>
-      ),
-    },
-  },
-  {
-    start: moment("2025-02-11T09:00:00").toDate(),
-    end: moment("2025-02-11T10:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Fatima Lee
-          </p>
-        </div>
-      ),
-    },
-  },
-  {
-    start: moment("2025-02-11T10:00:00").toDate(),
-    end: moment("2025-02-11T11:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Hassan Clark
-          </p>{" "}
-          Hassan Clark
-        </div>
-      ),
-    },
-  },
-  {
-    start: moment("2025-02-11T11:00:00").toDate(),
-    end: moment("2025-02-11T12:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Nora Lopez
-          </p>{" "}
-          Hassan Clark
-        </div>
-      ),
-    },
-  },
-  {
-    start: moment("2025-02-11T12:00:00").toDate(),
-    end: moment("2025-02-11T13:00:00").toDate(),
-    title: "Event 5",
-    data: {
-      node: (data: any) => (
-        <div className="relative flex h-full w-full animate-pulse-ongoing">
-          {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
-          <div className="animate border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]">
-            <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-              POTENTIAL NO SHOW
+    {
+      start: moment("2025-01-14T09:00:00").toDate(),
+      end: moment("2025-01-14T10:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
             </span>
             <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-              {moment(data.event.start).format("h:mm a")} Mahmoud Sangh
+              {moment(data.event.start).format("h:mm a")} Fatima Lee
             </p>
           </div>
-        </div>
-      ),
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-13T09:00:00").toDate(),
-    end: moment("2025-02-13T10:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Hassan Clark
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-14T10:00:00").toDate(),
+      end: moment("2025-01-14T11:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Hassan Clark
+            </p>{" "}
+            Hassan Clark
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-13T10:00:00").toDate(),
-    end: moment("2025-02-13T11:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Aisha Green
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-14T11:00:00").toDate(),
+      end: moment("2025-01-14T12:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Nora Lopez
+            </p>{" "}
+            Hassan Clark
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-13T11:00:00").toDate(),
-    end: moment("2025-02-13T12:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Khalid Carte
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-14T12:00:00").toDate(),
+      end: moment("2025-01-14T13:00:00").toDate(),
+      title: "Event 5",
+      data: {
+        node: (data: any) => (
+          <div className="relative flex h-full w-full animate-pulse-ongoing">
+            {/* <span className="animate-ping duration-1.5s absolute inline-flex h-full w-full rounded-full bg-[#fff7f5] opacity-50"></span> */}
+            <div
+              className={`border-[3px] border-[#ff6733] rounded-md px-2 py-3 w-full  bg-[#fff7f5]`}
+            >
+              <span className="bg-[#ff6733] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+                POTENTIAL NO SHOW
+              </span>
+              <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+                {moment(data.event.start).format("h:mm a")} Mahmoud Sangh
+              </p>
+            </div>
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-14T09:30:00").toDate(),
-    end: moment("2025-02-14T10:30:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Rana White
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-16T09:00:00").toDate(),
+      end: moment("2025-01-16T10:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Hassan Clark
+            </p>{" "}
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-14T12:00:00").toDate(),
-    end: moment("2025-02-14T13:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Rana White
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-16T10:00:00").toDate(),
+      end: moment("2025-01-16T11:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Aisha Green
+            </p>{" "}
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-09T11:30:00").toDate(),
-    end: moment("2025-02-09T12:30:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Ahmed Joss
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-16T11:00:00").toDate(),
+      end: moment("2025-01-16T12:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Khalid Carte
+            </p>{" "}
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-10T12:00:00").toDate(),
-    end: moment("2025-02-10T13:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Travis Fuller
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-17T09:30:00").toDate(),
+      end: moment("2025-01-17T10:30:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Rana White
+            </p>{" "}
+          </div>
+        ),
+      },
     },
-  },
-  {
-    start: moment("2025-02-12T12:00:00").toDate(),
-    end: moment("2025-02-12T13:00:00").toDate(),
-    title: "Event 3",
-    data: {
-      node: (data: any) => (
-        <div className="border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5]  ">
-          <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
-            Confirmed 2 Hours Ago
-          </span>
-          <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
-            {moment(data.event.start).format("h:mm a")} Zaid Wilson
-          </p>{" "}
-        </div>
-      ),
+    {
+      start: moment("2025-01-17T12:00:00").toDate(),
+      end: moment("2025-01-17T13:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Rana White
+            </p>{" "}
+          </div>
+        ),
+      },
     },
-  },
-];
+    {
+      start: moment("2025-01-12T11:30:00").toDate(),
+      end: moment("2025-01-12T12:30:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Ahmed Joss
+            </p>{" "}
+          </div>
+        ),
+      },
+    },
+    {
+      start: moment("2025-01-13T12:00:00").toDate(),
+      end: moment("2025-01-13T13:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Travis Fuller
+            </p>{" "}
+          </div>
+        ),
+      },
+    },
+    {
+      start: moment("2025-01-15T12:00:00").toDate(),
+      end: moment("2025-01-15T13:00:00").toDate(),
+      title: "Event 3",
+      data: {
+        node: (data: any) => (
+          <div
+            className={`border-[3px] border-[#29CC39] rounded-md px-2 py-3 h-full bg-[#fffcf5] ${
+              hasNoShows ? "!opacity-10" : ""
+            } `}
+          >
+            <span className="bg-[#29CC39] text-white rounded-md px-2 py-1 text-xs mb-3 w-fit block font-semibold">
+              Confirmed 2 Hours Ago
+            </span>
+            <p className="text-[#4D5E80] text-xs xl:text-base mb-2 font-bold">
+              {moment(data.event.start).format("h:mm a")} Zaid Wilson
+            </p>{" "}
+          </div>
+        ),
+      },
+    },
+  ];
+  return events;
+}
 
 const components: Components<MyEvent, object> = {
   // timeSlotWrapper: (props) => {
@@ -482,11 +532,29 @@ const components: Components<MyEvent, object> = {
       </div>
     );
   },
-  
 };
 
-const MyCalendar = () => {
+const filterCards = [
+  {
+    title: "Show Everything",
+  },
+  {
+    title: "Potential No Shows",
+  },
+  {
+    title: "Unscheduled Treatments",
+  },
+  {
+    title: "Scheduled Recalls",
+  },
+  {
+    title: "New Patient Lead",
+  },
+];
+
+const MyCalendar = ({ hasNoShows }: { hasNoShows?: boolean }) => {
   const [currentView, setCurrentView] = useState<View>(Views.WEEK);
+  const [date, setDate] = useState(new Date());
 
   const handleViewChange = (view: View) => {
     console.log("Current View:", view); // Logs the current view ('month', 'week', 'day', etc.)
@@ -563,11 +631,17 @@ const MyCalendar = () => {
   }, [currentView]);
   return (
     <Provider>
-      <div className="myCustomHeight w-full px-5 pb-10">
+      <div className="myCustomHeight w-full px-5 pb-10 space-y-12">
+        <FilterUi title="Filter Calender By" cards={filterCards} />
         <Calendar<MyEvent>
           onView={handleViewChange}
+          view={currentView}
+          date={date} // Include the date prop
+          onNavigate={(date) => {
+            setDate(new Date(date));
+          }}
           localizer={localizer}
-          events={events}
+          events={getEvents(hasNoShows)}
           startAccessor="start"
           endAccessor="end"
           style={{ height: "100vh" }}

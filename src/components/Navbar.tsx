@@ -39,7 +39,9 @@ function Navbar() {
               checked={checked}
               onCheckedChange={setChecked}
             />
-            <span className="text-[#818993]">Enabled</span>
+            <span className="text-[#818993]">
+              {checked ? "Enabled" : "Disabled"}
+            </span>
           </div>
 
           <Mail

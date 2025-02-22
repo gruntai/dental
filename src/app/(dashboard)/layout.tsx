@@ -12,9 +12,12 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Sidebar isOpened={isOpened} handleOpenState={setIsOpened} />
       <Navbar />
       <div
-        className={cn("mt-28 px-5 lg:pl-80 w-full duration-500 ", {
-          "lg:pl-20": isOpened,
-        })}
+        className={cn(
+          "mt-14 py-10 px-5 lg:pl-80 w-full duration-500 bg-[#F7F7F7]",
+          {
+            "lg:pl-20": isOpened,
+          }
+        )}
       >
         {children}
       </div>

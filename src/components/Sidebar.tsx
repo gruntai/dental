@@ -2,7 +2,7 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-import { Clock } from "lucide-react";
+import { Clock, ShoppingCart, UserPlus, Users, Wallet } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -17,7 +17,7 @@ function Sidebar({
   return (
     <aside
       className={cn(
-        "w-72 h-[calc(100%-6.25rem)] fixed left-0 top-24 mt-1 pb-5  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
+        "w-72 h-[calc(100%-61px)] border-r border-r-black fixed left-0 top-[61px] pt-8 pb-5  hidden z-40 lg:block bg-white slide-out-to-left-[300px] duration-500 pl-7 pr-5",
         {
           "-translate-x-[290px]": isOpened,
           // "slide-out-to-left-[300px]": isOpened,
@@ -43,57 +43,49 @@ function Sidebar({
     </aside>
   );
 }
-
 const menuItems = [
   {
-    icon: "Image-3.svg",
+    icon: "Image-3.svg", // Same icon as "Overview"
     label: "Overview",
     link: "/overview",
     width: 14,
     height: 16,
   },
   {
-    icon: "Image-2.svg",
-    label: "View Calendar",
-    link: "/calender",
+    icon: <ShoppingCart size={20} />, // Same icon as "View Calendar"
+    label: "View Orders",
+    link: "/view-orders",
     width: 16,
     height: 16,
   },
   {
-    icon: "Image-1.svg",
-    label: "Potential No Shows",
-    link: "/no-shows",
+    icon: <UserPlus size={20} />, // Same icon as "Potential No Shows"
+    label: "Add Customer",
+    link: "/add-customer",
     width: 16,
     height: 16,
   },
   {
-    icon: "Image.svg",
-    label: "Patient Retention",
-    link: "/patient-retention",
+    icon: <Users size={20} />, // Same icon as "Patient Retention"
+    label: "View Customers",
+    link: "/view-customers",
     width: 18,
     height: 16,
   },
   {
-    icon: "$.svg",
-    label: "New Patient Leads",
-    link: "/leads",
+    icon: <Wallet size={20} />, // Same icon as "New Patient Leads"
+    label: "My Accounting",
+    link: "/my-accounting",
+  },
+  {
+    icon: "$.svg", // Same icon as "My Patient Waitlist"
+    label: "My Expenses",
+    link: "/my-expenses",
     width: 11,
     height: 19,
   },
   {
-    icon: <Clock className="w-4 h-4" />,
-    label: "My Patient Waitlist",
-    link: "/patient-waitlist",
-  },
-  // {
-  //   icon: "resource.svg",
-  //   label: "Resource Optimization",
-  //   link: "/resource-optimization",
-  //   width: 18,
-  //   height: 18,
-  // },
-  {
-    icon: "analysis.svg",
+    icon: "analysis.svg", // Same icon as "Performance Analysis"
     label: "Performance Analysis",
     link: "/performance-analysis",
     width: 18,

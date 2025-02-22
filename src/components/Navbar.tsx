@@ -7,31 +7,38 @@ import { Input } from "./ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
 import { NavigationList } from "./Sidebar";
 import Link from "next/link";
+import { Button, buttonVariants } from "./ui/button";
+import { cn } from "@/lib/utils";
 
 function Navbar() {
   const [checked, setChecked] = React.useState(true);
   return (
-    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 lg:px-10 py-3 pt-5 border-b border-black">
+    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 lg:px-7 py-3 pt-5 border-b border-black">
       <div className="flex gap-20 items-center">
-        <Image
-          src="/assets/images/logos/grunt_logo.png"
-          alt="grunt logo"
-          width={120}
-          height={30}
-          // className="pl-5"
-        />
-        <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden lg:block">
+        <Link href={"/"} className="flex items-center gap-2">
+          <Image
+            src="/assets/images/logos/logo.png"
+            alt="grunt logo"
+            width={25}
+            height={25}
+            // className="pl-5"
+          />
+          <span className="font-medium text-[#606063] text-[15px]">
+            Revenue Multiplier AI
+          </span>
+        </Link>
+        {/* <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden lg:block">
           <Input
             type="search"
             placeholder="Search for what you need..."
             className="outline-0 border-0"
           />
           <Search className="absolute left-3 top-2.5" size={16} />
-        </div>
+        </div> */}
       </div>
       <div className="flex items-start md:items-center gap-4 md:justify-end">
         <div className="flex flex-wrap gap-5 items-center">
-          <div className=" border-[#C5D0D3] border-[1.5px] rounded-lg h-[38px] px-2.5  flex items-center gap-2">
+          {/* <div className=" border-[#C5D0D3] border-[1.5px] rounded-lg h-[38px] px-2.5  flex items-center gap-2">
             <Switch
               className="h-5 w-9 data-[state=checked]:bg-green-600"
               thumbClasses="w-4 h-4 data-[state=checked]:translate-x-4"
@@ -42,8 +49,16 @@ function Navbar() {
             <span className="text-[#818993]">
               {checked ? "Enabled" : "Disabled"}
             </span>
-          </div>
-
+          </div> */}
+          <Link
+            href="/create-order"
+            className={buttonVariants({
+              className:
+                "!bg-[#28A745] hover:bg-[#28A745]/80 rounded-[5px] sm:h-7 !px-2",
+            })}
+          >
+            Create New Order
+          </Link>
           <Mail
             className="w-[18px] h-[18px] ml-3 cursor-pointer hidden lg:block"
             strokeWidth={2}

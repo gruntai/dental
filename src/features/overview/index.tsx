@@ -2,21 +2,22 @@ import FilterUi from "@/components/FilterUi";
 import HeaderSec from "@/components/HeaderSec";
 import React from "react";
 import MyCalendar from "./Calender/MyCalender";
+import Products from "./Products";
 const statsData = [
   {
     title: "Revenue Recovered",
     stat: "$30,000",
   },
   {
-    title: "New Patients Converted",
-    stat: "60",
+    title: "Expenses",
+    stat: "$18,340",
   },
   {
-    title: "Patients Retained",
+    title: "Orders Pending Delivery",
     stat: "220",
   },
   {
-    title: "No Shows Avoided",
+    title: "New Customers",
     stat: "60",
   },
 ];
@@ -28,7 +29,8 @@ function Overview() {
         title="Grunt helped recover $30,000 this month"
         cards={statsData}
       />
-      <MyCalendar />
+      <Products />
+      {/* <MyCalendar /> */}
     </div>
   );
 }

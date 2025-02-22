@@ -12,9 +12,43 @@ import {
   Trash,
 } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
-function page() {
+function Page() {
+  const [inputVal, setInputVal] = useState("");
+  const [customers, setCustomers] = useState([...defaultCustomers]);
+  const [isInputFocused, setIsInputFocused] = useState(false); // New state for input focus
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // State for selected customer
+  const searchParam = useSearchParams();
+  const productName = searchParam.get("category");
+  console.log(productName);
+
+  console.log(selectedCustomer);
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputVal(e.target.value);
+  }
+
+  const filteredCustomers =
+    inputVal &&
+    customers.filter(
+      (customer) =>
+        customer.name.toLowerCase().includes(inputVal.toLowerCase()) ||
+        customer.email.toLowerCase().includes(inputVal.toLowerCase()) ||
+        customer.phone.toLowerCase().includes(inputVal.toLowerCase())
+    );
+
+  // Function to handle customer selection
+  const handleCustomerSelect = (customer) => {
+    console.log(customer);
+
+    setSelectedCustomer(customer); // Set the selected customer
+    setInputVal(""); // Clear the input value
+    setIsInputFocused(false); // Hide the search box
+  };
+  console.log(selectedCustomer);
+
   return (
     <div className="">
       <div className="space-y-5">
@@ -39,10 +73,38 @@ function page() {
                   New Customer?
                 </span>
               </div>
-              <Input
-                className="border-[#D3D3D3] placeholder:text-[#828282] placeholder:text-xs"
-                placeholder="Enter customer name, phone number or email"
-              />
+              <div className="relative">
+                <Input
+                  className="border-[#D3D3D3] placeholder:text-[#828282] placeholder:text-xs"
+                  placeholder="Enter customer name, phone number or email"
+                  value={inputVal}
+                  onChange={handleInputChange}
+                  onFocus={() => setIsInputFocused(true)} // Set focus state to true
+                  onBlur={() => setTimeout(() => setIsInputFocused(false), 100)} // Set focus state to false
+                />
+                {inputVal &&
+                  isInputFocused && ( // Show search box only when input is focused and has value
+                    <div className="searchbox border border-gray-400 bg-white rounded-md w-3/4 h-40 max-h-80 overflow-y-auto absolute top-[calc(100%+10px)] left-0 ">
+                      {!!filteredCustomers?.length ? (
+                        filteredCustomers?.map((customer) => {
+                          console.log(customer);
+
+                          return (
+                            <SeachOption
+                              key={customer.id}
+                              data={customer}
+                              onClick={() => handleCustomerSelect(customer)}
+                            />
+                          );
+                        })
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          No search results.
+                        </div>
+                      )}
+                    </div>
+                  )}
+              </div>
             </div>
             <div className="border-black border rounded-sm py-3">
               <div className="py-3 pb-5  px-5 border-b border-black">
@@ -53,23 +115,56 @@ function page() {
                 <div className="flex flex-wrap -mx-5 gap-y-5">
                   <div className="px-5 space-y-2 w-full  sm:w-1/2">
                     <p>Customer Name</p>
-                    <Input className="border-black" />
+                    <Input
+                      className="border-black"
+                      value={selectedCustomer?.name || ""}
+                      onChange={(e) =>
+                        setSelectedCustomer({
+                          ...selectedCustomer,
+                          name: e.target.value,
+                        })
+                      }
+                    />
                   </div>
                   <div className="px-5 space-y-2  w-full sm:w-1/2">
                     <p>Customer No</p>
-                    <Input className="border-black" />
+                    <Input
+                      className="border-black"
+                      value={selectedCustomer?.id || ""}
+                      onChange={(e) =>
+                        setSelectedCustomer({
+                          ...selectedCustomer,
+                          id: e.target.value,
+                        })
+                      }
+                    />
                   </div>
                   <div className="px-5 space-y-2  w-full sm:w-1/2">
                     <p>Customer Email</p>
-                    {/* <div className="w-full "> */}
-                    <Input className="border-black" type="email" />
-                    {/* </div> */}
+                    <Input
+                      className="border-black"
+                      type="email"
+                      value={selectedCustomer?.email || ""}
+                      onChange={(e) =>
+                        setSelectedCustomer({
+                          ...selectedCustomer,
+                          email: e.target.value,
+                        })
+                      }
+                    />
                   </div>
                   <div className="px-5 space-y-2  w-full sm:w-1/2">
                     <p>Customer Phone Number</p>
-                    {/* <div className="w-full "> */}
-                    <Input className="border-black" />
-                    {/* </div> */}
+                    <Input
+                      className="border-black"
+                      value={selectedCustomer?.phone || ""}
+                      onChange={(e) =>
+                        setSelectedCustomer({
+                          ...selectedCustomer,
+                          phone: e.target.value,
+                        })
+                      }
+                    />
                   </div>
                 </div>
               </div>
@@ -83,7 +178,7 @@ function page() {
                   <div className="flex items-center gap-2">
                     <GripVertical size={16} />
                     <Layers size={16} />
-                    <span>Images & Illustration</span>
+                    <span>{productName}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button
@@ -116,7 +211,7 @@ function page() {
                   <div className="px-5 space-y-2 w-full md:w-1/2">
                     <p>Quantity</p>
                     <div className="w-full ">
-                      <Input className="border-black" />
+                      <Input className="border-black" type="number" />
                     </div>
                   </div>
                 </div>
@@ -128,9 +223,6 @@ function page() {
                 </p>
                 {/* additional amount */}
                 <DeliveryOptions />
-                {/* <div className="flex flex-wrap -mx-5">
-
-                </div> */}
               </div>
             </div>
           </div>
@@ -167,7 +259,7 @@ function page() {
             <hr className="border-black my-10" />
             <div className="flex justify-between items-center mb-10">
               <span className="text-[#948D85] text-lg font-medium">
-                Payment Dueg
+                Payment Due
               </span>
               <span className="text-[#544330] text-lg font-medium">$28.25</span>
             </div>
@@ -186,13 +278,27 @@ function page() {
   );
 }
 
+function SeachOption({ data, onClick }) {
+  return (
+    <div
+      className="flex flex-wrap justify-between  border-b last:border-0 border-black/50 gap-y-1 p-2 hover:bg-slate-50 duration-200 cursor-pointer"
+      onClick={onClick}
+    >
+      <div className="w-[45%] text-[10px] break-words">{data?.id}</div>
+      <div className="w-[45%] text-[10px] break-words">{data?.name}</div>
+      <div className="w-[45%] text-[10px] break-words">{data?.email}</div>
+      <div className="w-[45%] text-[10px] break-words">{data?.phone}</div>
+    </div>
+  );
+}
+
 const DeliveryOptions = () => {
   const [selected, setSelected] = useState("pickup");
 
   return (
-    <div className="flex flex-wrap xl:flex-nowrap gap-4">
+    <div className="flex flex-wrap justify-between xl:flex-nowrap gap-4">
       <div
-        className={`w-full sm:w-64 p-4 border rounded-sm cursor-pointer  flex justify-between items-start ${
+        className={`w-full sm:w-[48%] p-4 border rounded-[4px] cursor-pointer  flex justify-between items-start ${
           selected === "delivery" ? "border-purple-500" : "border-gray-300"
         }`}
         onClick={() => setSelected("delivery")}
@@ -207,7 +313,7 @@ const DeliveryOptions = () => {
       </div>
 
       <div
-        className={`w-full sm:w-64 p-4 border rounded-sm cursor-pointer flex justify-between items-start ${
+        className={`w-full sm:w-[48%] p-4 border rounded-[4px] cursor-pointer flex justify-between items-start ${
           selected === "pickup" ? "border-purple-500" : "border-gray-300"
         }`}
         onClick={() => setSelected("pickup")}
@@ -224,4 +330,25 @@ const DeliveryOptions = () => {
   );
 };
 
-export default page;
+export default Page;
+
+const defaultCustomers = [
+  {
+    id: "#CUS-2345A9X",
+    name: "Nick Lashely",
+    email: "nick.lashley@email.com",
+    phone: "+1 (555) 234-1001",
+  },
+  {
+    id: "#CUS-6781B3Z",
+    name: "Sophia Bennett",
+    email: "sophia.bennett@email.com",
+    phone: "+44 20 7946 5678",
+  },
+  {
+    id: "#CUS-9827M6Y",
+    name: "Ethan Carter",
+    email: "ethan.carter@email.com",
+    phone: "+61 4 3928 4321",
+  },
+];

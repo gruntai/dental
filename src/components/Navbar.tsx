@@ -17,15 +17,12 @@ function Navbar() {
       <div className="flex gap-20 items-center">
         <Link href={"/"} className="flex items-center gap-2">
           <Image
-            src="/assets/images/logos/logo.png"
+            src="/assets/images/logos/grunt_logo.png"
             alt="grunt logo"
-            width={25}
-            height={25}
+            width={125}
+            height={50}
             // className="pl-5"
           />
-          <span className="font-medium text-[#606063] text-[15px]">
-            Revenue Multiplier AI
-          </span>
         </Link>
         {/* <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden lg:block">
           <Input

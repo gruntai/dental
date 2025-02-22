@@ -5,7 +5,7 @@ import MyCalendar from "./Calender/MyCalender";
 import Products from "./Products";
 const statsData = [
   {
-    title: "Revenue Recovered",
+    title: "Gross Sales",
     stat: "$30,000",
   },
   {
@@ -26,7 +26,7 @@ function Overview() {
   return (
     <div className="space-y-10 pb-20">
       <HeaderSec
-        title="Grunt helped recover $30,000 this month"
+        title="You’ve made $11,000 net profit this month"
         cards={statsData}
       />
       <Products />

@@ -99,7 +99,7 @@ export function AccountingFeat() {
         <div className="relative rounded-lg border border-black cursor-pointer w-full sm:w-[45%] md:w-[30%] xl:w-[22%] 2xl:w-[18%] h-full py-5">
           <div className="flex sm:block items-center h-full flex-1">
             <Image
-              src={"/assets/images/accounting-records/3.svg"}
+              src={"/assets/images/accounting-records/4.svg"}
               alt={"expense"}
               width={100}
               height={100}

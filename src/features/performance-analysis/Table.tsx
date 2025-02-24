@@ -38,54 +38,54 @@ const filterOptions = [
 
 const notifications = [
   {
-    title: "Patient retention down 12% this month",
+    title: "$7,320 in Unpaid Customer Invoices",
     description:
-      "This will most likely impact your earnings this quarter. Grunt identify 23 patients that was unscheduled. You can activate your retention agent to avoid this in the future.",
+      "18 customers have overdue invoices, delaying cash flow. Suggested Action: Send automated payment reminders or offer small early payment discounts.",
     status: "Critical",
     image: {
       src: "customer-management.png",
       alt: "Image 3",
       width: 30,
-      height: 30
+      height: 30,
     },
     actionType: "takeAction",
   },
   {
-    title: "Over-ordering detected",
+    title: "Utility Bills Increased by 14% ($870 Higher)",
     description:
-      "Grunt Inventory Agent detected an order of 25 packs of dental alginate. You have 20 in stock, enough for scheduled cases and chair capacity. Overstock may result in $300+ in waste.",
+      "This month's water and electricity costs jumped from $6,230 to $7,100. Suggested Action: Reduce machine idle time and optimize load distribution.",
     status: "Warning",
     image: {
       src: "inventory.png",
       alt: "Image 2",
       width: 30,
-      height: 30
+      height: 30,
     },
     actionType: "takeAction",
   },
   {
-    title: "No-show rates increasing",
+    title: "Supply Costs Up by 9% ($1,450 Higher)",
     description:
-      "Grunt detected 9 no-shows this week, resulting in a $2,918 loss. You may activate the Grunt No-Show Agent to help detect and prevent this.",
+      "Last month: $16,120 → This month: $17,570. Key increases: Detergent: +$600 Solvents: +$450 Suggested Action: Reevaluate supplier contracts and consider bulk ordering.",
     status: "Critical",
     image: {
       src: "book.png",
       alt: "Image 1",
       width: 30,
-      height: 30
+      height: 30,
     },
     actionType: "noShow",
   },
   {
-    title: "40 missed calls this week",
+    title: "Potential Profitbility Impact",
     description:
-      "Grunt detected 40 missed calls this week. This is an estimated $3900 in revenue. You may activate the Grunt Conversion Agent to prevent this.",
+      "Profitability Impact: If supply costs keep increasing, profit margins may shrink by 8-10% in the next quarter.",
     status: "Critical",
     image: {
       src: "missed-call.png",
       alt: "Image",
       width: 30,
-      height: 30
+      height: 30,
     },
     actionType: "missed",
   },

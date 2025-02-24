@@ -47,17 +47,18 @@ import {
 import Image from "next/image";
 
 type Patient = {
-  patient: {
+  order: {
     name: string;
-    id: string;
+    image: string;
   };
+  quantity: string | number;
   totalSpend: string | number;
   status: {
     label: string;
     type: "completed" | "rushOrder" | "pendingPickup" | "pendingDelivery";
   };
+  orderDate: string;
   mostRecentService: string;
-  id: string;
 };
 
 const HeaderText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -68,57 +69,77 @@ const HeaderText: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 export const data: Patient[] = [
   {
-    patient: { name: "Adil Selma", id: "451-220-0001" },
-    totalSpend: "$3,000",
+    order: { name: "Rent", image: "1.svg" },
+    totalSpend: "$2600.00",
+    quantity: 1,
     status: { label: "Completed", type: "completed" },
     mostRecentService: "Jacket",
-    addedDate: "02/02/2025",
+    orderDate: "02/02/2025",
   },
   {
-    patient: { name: "Sam Lewis", id: "451-220-0002" },
-    totalSpend: "$100",
+    order: { name: "Spotting Agent", image: "2.svg" },
+    quantity: 60,
+    totalSpend: "$1750.00",
     status: { label: "Rush Order", type: "rushOrder" },
     mostRecentService: "Thoube",
-    addedDate: "02/03/2025",
+    orderDate: "02/03/2025",
   },
   {
-    patient: { name: "Charles Duncun", id: "451-220-0231" },
+    order: { name: "Hangers", image: "3.svg" },
+    quantity: 5,
     totalSpend: "$280.50",
     status: { label: "Pending Pickup", type: "pendingPickup" },
     mostRecentService: "Shirt",
-    addedDate: "02/04/2025",
+    orderDate: "02/04/2025",
   },
   {
-    patient: { name: "Mary Knight", id: "451-220-9451" },
+    order: { name: "Electricity Bill", image: "4.svg" },
+    quantity: 1,
     totalSpend: "$1,600",
     status: { label: "Pending Delivery", type: "pendingDelivery" },
     mostRecentService: "Wedding Dress",
-    addedDate: "02/06/2025",
+    orderDate: "02/06/2025",
   },
 ];
 
 export const columns: ColumnDef<Patient>[] = [
   {
-    accessorKey: "patient",
-    header: () => <HeaderText>Customer Information</HeaderText>,
+    accessorKey: "order",
+    header: () => <HeaderText>Order Name</HeaderText>,
     cell: ({ row }) => (
       <div className="flex items-center gap-2 w-52">
-        <div className="w-9 h-9 text-[#B8BCC0] bg-[#545a60] rounded-full flex items-center justify-center">
-          {(row.getValue("patient")?.name as string)
-            .split(" ")
-            .map((word) => word[0])
-            .join("")}
+        <div className="w-9 h-9 text-[#B8BCC0] bg-[#E9E9E9] rounded-full flex items-center justify-center">
+          <Image
+            src={`/assets/images/expenses/${row.getValue("order")?.image}`}
+            alt={"expense"}
+            width={17}
+            height={17}
+          />
         </div>
         <div className="flex flex-col font-semibold">
           <span className="text-[#777777] text-xs">
-            {row.getValue("patient")?.name}
-          </span>
-          <span className="text-[#A8A8A8] text-[10px]">
-            {row.getValue("patient")?.id}
+            {row.getValue("order")?.name}
           </span>
         </div>
       </div>
     ),
+  },
+  {
+    accessorKey: "quantity",
+    header: ({ column }) => (
+      <div className="flex items-center justify-between w-28">
+        <HeaderText> Quantity</HeaderText>
+        <Button variant="ghost" size={"icon"}>
+          <GripVertical />
+        </Button>
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div className="text-xs text-[#A5A5A5] font-semibold  w-36">
+        {row.getValue("quantity")}
+      </div>
+    ),
+    enableSorting: true,
   },
   {
     accessorKey: "totalSpend",
@@ -138,10 +159,10 @@ export const columns: ColumnDef<Patient>[] = [
     enableSorting: true,
   },
   {
-    accessorKey: "addedDate",
+    accessorKey: "orderDate",
     header: () => (
       <div className="flex items-center w-40">
-        <HeaderText>Last Order</HeaderText>
+        <HeaderText>Order Date</HeaderText>
         <Button
           variant="ghost"
           size={"icon"}
@@ -156,45 +177,15 @@ export const columns: ColumnDef<Patient>[] = [
     ),
     cell: ({ row }) => (
       <div className="text-xs text-[#A5A5A5] font-semibold">
-        {row.getValue("addedDate")}
+        {row.getValue("orderDate")}
       </div>
     ),
   },
   {
     accessorKey: "status",
-    header: ({ column }) => (
-      <div className="flex items-center w-40">
-        <HeaderText>Status</HeaderText>
-        <Button
-          variant="ghost"
-          size={"icon"}
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          <ChevronsUpDown />
-        </Button>
-        <Button variant="ghost" size={"icon"}>
-          <GripVertical />
-        </Button>
-      </div>
-    ),
+    header: ({ column }) => <></>,
     cell: ({ row }) => {
-      const status = row.getValue("status") as { label: string; type: string };
-      const statusClasses: Record<string, string> = {
-        completed: "bg-[#28A745] text-[#fff]",
-        rushOrder: "bg-[#F1E0D5] text-[#693124]",
-        pendingPickup: "bg-[#E8F6E9] text-[#80AD95]",
-        pendingDelivery: "bg-[#CC7429] text-white",
-      };
-
-      return (
-        <span
-          className={`py-0.5 rounded-[4px] text-[10px] font-semibold w-fit px-2 block text-center ${
-            statusClasses[status.type] || "bg-gray-200 text-gray-700"
-          }`}
-        >
-          {status.label}
-        </span>
-      );
+      return <Button variant={"outline"} className="border-black h-8">Upload Receipt</Button>;
     },
     sortingFn: (rowA, rowB) => {
       const nameA = rowA.original.status.label.toLowerCase();
@@ -204,26 +195,9 @@ export const columns: ColumnDef<Patient>[] = [
   },
   {
     accessorKey: "mostRecentService",
-    header: () => (
-      <div className="flex items-center w-40">
-        <HeaderText>Most Recent Service</HeaderText>
-        <Button
-          variant="ghost"
-          size={"icon"}
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          <ArrowDown color="black" size={6} />
-        </Button>
-        <Button variant="ghost" size={"icon"}>
-          <GripVertical />
-        </Button>
-      </div>
-    ),
+    header: () => <></>,
     cell: ({ row }) => (
-      <div className="flex items-center justify-between w-[250px]">
-        <span className="w-[80%] text-xs font-semibold text-[#A5A5A5]">
-          {row.getValue("mostRecentService")}
-        </span>
+      <div className="flex items-center justify-between">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -292,7 +266,7 @@ export default function ExpensesTable() {
 
   return (
     <div className="w-full mt-10 ">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-end lg:items-center">
         <FilterUi title="Filter Expenses By" cards={filterCards} />
         <Button className="bg-green-600 hover:bg-green-500">Add Expense</Button>
       </div>

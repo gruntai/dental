@@ -80,7 +80,7 @@ const menuItems = [
   {
     icon: "$.svg", // Same icon as "My Patient Waitlist"
     label: "My Expenses",
-    link: "/my-expenses",
+    link: "/expenses",
     width: 11,
     height: 19,
   },

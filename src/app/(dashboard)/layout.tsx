@@ -13,7 +13,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Navbar />
       <div
         className={cn(
-          "mt-14 py-10 px-5 lg:pl-80 w-full duration-500 bg-[#F7F7F7]",
+          "main mt-14 py-10 px-5 lg:pl-80 w-full duration-500 bg-[#F7F7F7]",
           {
             "lg:pl-20": isOpened,
           }

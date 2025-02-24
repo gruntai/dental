@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import React from "react";
 
 export function HeaderSec({
@@ -13,7 +14,11 @@ export function HeaderSec({
   return (
     <div>
       <p className="font-bold text-2xl sm:text-3xl mb-10 ">{title}</p>
-      <div className="flex flex-wrap w-full justify-between gap-y-5">
+      <div
+        className={cn("flex flex-wrap w-full justify-between gap-y-5", {
+          "justify-normal gap-5": cards.length < 4,
+        })}
+      >
         {cards.map((card, index) => (
           <div className="w-full sm:w-[48%] md:w-[30%] lg:w-[23%]">
             <div

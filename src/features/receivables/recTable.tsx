@@ -245,22 +245,7 @@ export const columns: ColumnDef<Patient>[] = [
   },
 ];
 
-const filterCards = [
-  {
-    title: "Show Everything",
-  },
-  {
-    title: "Expense Type",
-  },
-  {
-    title: "Expense Total",
-  },
-  {
-    title: "Expense By Date",
-  },
-];
-
-export default function ExpensesTable() {
+export default function recTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -273,6 +258,21 @@ export default function ExpensesTable() {
 
     return () => document.querySelector(".main")?.classList.remove("!bg-white");
   }, []);
+
+  const filterCards = [
+    {
+      title: "Show Everything",
+    },
+    {
+      title: "Expense Type",
+    },
+    {
+      title: "Expense Total",
+    },
+    {
+      title: "Expense By Date",
+    },
+  ];
 
   const table = useReactTable({
     data,
@@ -291,12 +291,11 @@ export default function ExpensesTable() {
   });
 
   return (
-    <div className="w-full mt-10 ">
-      <div className="flex justify-between items-center">
-        <FilterUi title="Filter Expenses By" cards={filterCards} />
-        <Button className="bg-green-600 hover:bg-green-500">Add Expense</Button>
+    <div className="w-full mt-10">
+      <div className="flex items-center gap-3 mb-5">
+        <FilterUi title="Filter Expenses By" cards={filterCards} />{" "}
       </div>
-      <div className="rounded-md border mt-5">
+      <div className="rounded-md border">
         <Table className="bg-white">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

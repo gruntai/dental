@@ -4,15 +4,15 @@ import React from "react";
 
 const statsData = [
   {
-    title: "Reduction In Overspending",
+    title: "Total Owed To You",
     stat: "$7,680",
   },
   {
-    title: "Reduction In Waste",
+    title: "Pending Supplier Payments",
     stat: "$9,270",
   },
   {
-    title: "Current Supply Level",
+    title: "Operational Cost Reduction",
     stat: "80%",
   },
   {

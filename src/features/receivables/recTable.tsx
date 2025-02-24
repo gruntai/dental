@@ -70,28 +70,28 @@ export const data: Patient[] = [
   {
     patient: { name: "Adil Selma", id: "451-220-0001" },
     totalSpend: "$3,000",
-    status: { label: "Completed", type: "completed" },
+    status: { label: "Paid", type: "paid" },
     mostRecentService: "Jacket",
     addedDate: "02/02/2025",
   },
   {
     patient: { name: "Sam Lewis", id: "451-220-0002" },
     totalSpend: "$100",
-    status: { label: "Rush Order", type: "rushOrder" },
+    status: { label: "Overdue", type: "overdue" },
     mostRecentService: "Thoube",
     addedDate: "02/03/2025",
   },
   {
     patient: { name: "Charles Duncun", id: "451-220-0231" },
     totalSpend: "$280.50",
-    status: { label: "Pending Pickup", type: "pendingPickup" },
+    status: { label: "Awaiting Payment", type: "awaitingPayment" },
     mostRecentService: "Shirt",
     addedDate: "02/04/2025",
   },
   {
     patient: { name: "Mary Knight", id: "451-220-9451" },
     totalSpend: "$1,600",
-    status: { label: "Pending Delivery", type: "pendingDelivery" },
+    status: { label: "Awaiting Payment", type: "awaitingPayment" },
     mostRecentService: "Wedding Dress",
     addedDate: "02/06/2025",
   },
@@ -124,7 +124,7 @@ export const columns: ColumnDef<Patient>[] = [
     accessorKey: "totalSpend",
     header: ({ column }) => (
       <div className="flex items-center justify-between w-28">
-        <HeaderText>Total Spend</HeaderText>
+        <HeaderText>Total Amount</HeaderText>
         <Button variant="ghost" size={"icon"}>
           <GripVertical />
         </Button>
@@ -141,7 +141,7 @@ export const columns: ColumnDef<Patient>[] = [
     accessorKey: "addedDate",
     header: () => (
       <div className="flex items-center w-40">
-        <HeaderText>Last Order</HeaderText>
+        <HeaderText>Due Date</HeaderText>
         <Button
           variant="ghost"
           size={"icon"}
@@ -180,15 +180,14 @@ export const columns: ColumnDef<Patient>[] = [
     cell: ({ row }) => {
       const status = row.getValue("status") as { label: string; type: string };
       const statusClasses: Record<string, string> = {
-        completed: "bg-[#28A745] text-[#fff]",
-        rushOrder: "bg-[#F1E0D5] text-[#693124]",
-        pendingPickup: "bg-[#E8F6E9] text-[#80AD95]",
-        pendingDelivery: "bg-[#CC7429] text-white",
+        paid: "bg-[#28A745] text-[#fff]",
+        overdue: "bg-[#F1E0D5] text-[#693124]",
+        awaitingPayment: "bg-[#CC7429] text-white",
       };
 
       return (
         <span
-          className={`py-0.5 rounded-[4px] text-[10px] font-semibold w-fit px-2 block text-center ${
+          className={`py-0.5 rounded-[4px] text-[10px] font-semibold w-fit px-5 block text-center ${
             statusClasses[status.type] || "bg-gray-200 text-gray-700"
           }`}
         >
@@ -206,7 +205,7 @@ export const columns: ColumnDef<Patient>[] = [
     accessorKey: "mostRecentService",
     header: () => (
       <div className="flex items-center w-40">
-        <HeaderText>Most Recent Service</HeaderText>
+        <HeaderText>Services Used</HeaderText>
         <Button
           variant="ghost"
           size={"icon"}

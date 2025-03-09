@@ -1,8 +1,7 @@
 "use client";
-
-import { useState } from "react";
+import { data, columns } from "./constants";
+import React, { useState, useEffect } from "react";
 import {
-  type ColumnDef,
   type ColumnFiltersState,
   type SortingState,
   flexRender,
@@ -22,14 +21,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
   Table,
   TableBody,
   TableCell,
@@ -37,138 +28,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal, ArrowUpDown } from "lucide-react";
-import Image from "next/image";
 import { ManageServicesDialog } from "./ManageServices";
-import { DeleteServiceDialog } from "./ConfirmDeleteDialog";
 import { PatientChartDialog } from "./PatientChartDialog";
 import { EditAIInstructionsDialog } from "./EditAIInstructionsDialog";
+import { PatientLoading } from "./ProcessLoading";
 
-// Define the Patient type
-type Patient = {
-  id: string;
-  avatar: string;
-  name: string;
-  phone: string;
-  lastVisit: string;
-  serviceType: string;
-  dueDate: string;
-  nextSteps: string;
-  assignedTo: string;
-};
-
-// Sample data
-const data: Patient[] = [
-  {
-    id: "1",
-    avatar: "/placeholder.svg?height=40&width=40",
-    name: "Nejat Murad",
-    phone: "1-413-904-5843",
-    lastVisit: "Jan 15, 2025",
-    serviceType: "Dental Cleaning",
-    dueDate: "Feb 15, 2025",
-    nextSteps: "Your AI assistant will contact patient tomorrow for recall.",
-    assignedTo: "Dr. Smith",
-  },
-];
-// Define columns
-const columns: ColumnDef<Patient>[] = [
-  {
-    accessorKey: "name",
-    header: "Patient Name",
-    cell: ({ row }) => (
-      <div className="flex items-center gap-3">
-        <div className="relative h-10 w-10 overflow-hidden rounded-full">
-          <img
-            src={"https://api.dicebear.com/7.x/lorelei/svg?seed=John"}
-            alt="Patient avatar"
-            width={40}
-            height={40}
-            className="object-cover"
-          />
-        </div>
-        <div>
-          <div className="font-normal text-[#111827]">{row.original.name}</div>
-          <div className="text-xs">{row.original.phone}</div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    accessorKey: "lastVisit",
-    header: ({ column }) => {
-      return <p> Last Visit</p>;
-    },
-  },
-  {
-    accessorKey: "serviceType",
-    header: "Service Type",
-  },
-  {
-    accessorKey: "dueDate",
-    header: ({ column }) => {
-      return <p> Due Date</p>;
-    },
-  },
-  {
-    accessorKey: "nextSteps",
-    header: "Next Steps",
-    cell: ({ row }) => (
-      <div className="max-w-[200px]">{row.original.nextSteps}</div>
-    ),
-  },
-  {
-    accessorKey: "assignedTo",
-    header: "Assigned To",
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row, table }) => {
-      const handleOpenPatientChart =
-        table?.options?.meta?.handleOpenPatientChart;
-      const handleOpenEditAIOpened =
-        table?.options?.meta?.handleOpenEditAIOpened;
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal className="h-5 w-5" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem>Start Process</DropdownMenuItem>
-            <DropdownMenuItem onClick={handleOpenEditAIOpened}>
-              Edit Instructions
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleOpenPatientChart}>
-              View Patient Chart
-            </DropdownMenuItem>{" "}
-            <DropdownMenuItem>Remove Patient</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
-  },
-];
 export function PatientRetentionTable() {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [isPatientChartOpened, setIsPatientChartOpened] = useState(false);
-
   const [isEditAIOpened, setisEditAIOpened] = useState(false);
+  const [selectedPatientProcess, setSelectedPatientProcess] =
+    useState<Array<{}> | null>(null);
+  const [expandedRows, setExpandedRows] = useState<Record<string, boolean>>();
+  function handleStartProcess(id: string) {
+    setExpandedRows((prev) => ({ ...prev, [id]: true }));
+  }
 
-  // Set up the table
   const table = useReactTable({
     data,
     columns,
     meta: {
       handleOpenPatientChart: () => setIsPatientChartOpened(true),
       handleOpenEditAIOpened: () => setisEditAIOpened(true),
+      handleStartProcess: (id: string) => handleStartProcess(id),
     },
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -177,6 +61,7 @@ export function PatientRetentionTable() {
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    getRowCanExpand: () => true,
     state: {
       sorting,
       columnFilters,
@@ -185,10 +70,8 @@ export function PatientRetentionTable() {
   });
 
   return (
-    // <div className="container mx-auto py-6">
     <>
       <div className="flex flex-col space-y-6">
-        {/* Search and filters */}
         <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="flex flex-1 flex-col sm:flex-row sm:items-center gap-5">
             <Input
@@ -214,7 +97,6 @@ export function PatientRetentionTable() {
           </div>
         </div>
 
-        {/* Data Table */}
         <div className="rounded-md border">
           <Table className="w-[1200px] xl:w-full">
             <TableHeader className="bg-[#f9fafb]">
@@ -235,24 +117,39 @@ export function PatientRetentionTable() {
             </TableHeader>
             <TableBody>
               {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell
-                        key={cell.id}
-                        className="tex-[#6B7280] font-normal text-xs"
+                table.getRowModel().rows.map((row) => {
+                  console.log(row.original.name, row.original.id);
+                  return (
+                    <React.Fragment key={row.id}>
+                      <TableRow
+                        key={row.id}
+                        data-state={row.getIsSelected() && "selected"}
                       >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
+                        {row.getVisibleCells().map((cell, idx) => (
+                          <TableCell
+                            key={cell.id}
+                            className="tex-[#6B7280] font-normal text-xs"
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                      {expandedRows?.[+row.id + 1] && (
+                        <tr>
+                          <td
+                            colSpan={columns.length}
+                            className="border p-4 bg-gray-100"
+                          >
+                            <PatientLoading />
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
+                  );
+                })
               ) : (
                 <TableRow>
                   <TableCell
@@ -267,7 +164,6 @@ export function PatientRetentionTable() {
           </Table>
         </div>
 
-        {/* Pagination */}
         <div className="flex items-center justify-between">
           <div className="text-sm text-muted-foreground">
             Showing{" "}
@@ -335,7 +231,6 @@ export function PatientRetentionTable() {
         )}
       </div>
     </>
-    // </div>
   );
 }
 

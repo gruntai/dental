@@ -1,0 +1,179 @@
+.rbc-allday-cell {
+  display: none !important;
+}
+
+/* th  */
+.rbc-header {
+  padding: 30px;
+}
+
+/* td  */
+.rbc-timeslot-group {
+  /* padding: 50px 10px; */
+  align-items: center;
+}
+
+.rbc-time-slot {
+  min-height: 150px;
+  padding-left: 15px;
+  padding-right: 15px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.rbc-time-slot .rbc-label {
+}
+
+.rbc-time-slot:nth-child(2) {
+  display: none;
+}
+
+/* event */
+.rbc-event,
+.rbc-event.rbc-selected {
+  background-color: transparent;
+  border: 0 !important;
+  outline: 0;
+}
+
+.rbc-event {
+  overflow: visible !important;
+}
+
+.rbc-event:focus {
+  outline: 0;
+}
+/* event container */
+.rbc-events-container {
+  margin-right: 0 !important;
+}
+
+/* label in events */
+.rbc-event-label {
+  display: none;
+}
+
+.rbc-time-view {
+  width: 1800px;
+}
+
+.rbc-time-header.rbc-overflowing {
+  margin-right: 0 !important;
+}
+
+/* line */
+.rbc-current-time-indicator {
+  width: 1800px;
+  left: -434%;
+  top: 10% !important;
+  background-color: #ff6633;
+  height: 2px;
+  z-index: 50000; /* Change the color of the current time line */
+  /* border-left: 2px solid #ff0000; Optional: Add a border */
+  /* z-index: 1000; /* Ensure the line appears above events */
+  /* left: 0 !important; Ensure the line starts from the left edge */
+  /* right: 0 !important; Ensure the line stretches to the right edge */
+  /* position: absolute; */
+  display: none !important;
+}
+.custom-line {
+  width: 767%;
+  left: -88px;
+}
+
+.custom-line::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -2.5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #ff6633;
+}
+
+.custom-line::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -2.5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #ff6633;
+}
+
+.rbc-current-time-indicator::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -2.5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #ff6633;
+}
+.rbc-current-time-indicator::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -2.5px;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  background: #ff6633;
+}
+/* scrollbar for calender */
+.rbc-time-content {
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+.rbc-time-content::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* time column */
+.rbc-time-gutter.rbc-time-column {
+  width: 84.8125px;
+  min-width: 84.8125px;
+  max-width: 84.8125px;
+  color: rgba(0, 0, 0, 0.3);
+  font-weight: 600;
+}
+
+/* today's active column */
+.rbc-today {
+  background: white !important;
+}
+
+.custom-time-indicator {
+  height: 2px;
+  background: #f74969;
+  position: relative;
+  z-index: 10;
+  left: -202%;
+  width: 303%;
+}
+
+.rbc-time-view,
+.rbc-time-content,
+.rbc-timeslot-group,
+.rbc-time-content > * + * > *,
+.rbc-header,
+.rbc-label.rbc-time-header-gutter,
+.rbc-time-header-content {
+  border-color: #f5f6f7 !important;
+}
+
+@media (max-width: 768px) {
+  .rbc-header {
+    padding: 10px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 1280px) {
+}

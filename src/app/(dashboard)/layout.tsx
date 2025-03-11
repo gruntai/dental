@@ -12,7 +12,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <Sidebar isOpened={isOpened} handleOpenState={setIsOpened} />
       <Navbar />
       <div
-        className={cn("mt-24 lg:pl-[350px] w-full duration-500", {
+        className={cn("mt-28 px-5 lg:pl-80 w-full duration-500 ", {
           "lg:pl-20": isOpened,
         })}
       >

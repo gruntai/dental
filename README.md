@@ -11,3 +11,4 @@
 - [X]  When someone confirms, the entire thing turns fully green https://prnt.sc/N0qYBb80zE8g, just like the Figma file.
 - [ ]  The design still does not match up with Figma 100% on the calendar page
 
+<!-- check this: https://onursimsek94.github.io/react-big-calendar/examples/index.html -->

@@ -161,8 +161,9 @@ export function Signup({
               <SelectValue placeholder="Select a country" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
+              <SelectGroup className="h-60 overflow-y-auto">
                 <SelectLabel>Countries</SelectLabel>
+                <SelectItem value="egypt">Egypt</SelectItem>
                 <SelectItem value="usa">United States</SelectItem>
                 <SelectItem value="uk">United Kingdom</SelectItem>
                 <SelectItem value="canada">Canada</SelectItem>

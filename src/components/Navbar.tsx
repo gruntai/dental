@@ -1,17 +1,18 @@
 "use client";
 import React from "react";
-import { Bell, Mail, MenuIcon, Search } from "lucide-react";
+import { Bell, Mail, MenuIcon, Search, Terminal } from "lucide-react";
 import { Switch } from "./ui/switch";
 import Image from "next/image";
 import { Input } from "./ui/input";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet";
 import { NavigationList } from "./Sidebar";
 import Link from "next/link";
+import TerminalDrawer from "@/features/terminal";
 
 function Navbar() {
   const [checked, setChecked] = React.useState(true);
   return (
-    <nav className="bg-white fixed left-0 top-0 z-50 w-full flex items-center justify-between px-5 lg:px-10 py-3 pt-5 border-b border-black">
+    <nav className="bg-white fixed left-0 top-0 z-[99999999999999] w-full flex items-center justify-between px-5 lg:px-10 py-3 pt-5 border-b border-black">
       <div className="flex gap-20 items-center">
         <Image
           src="/assets/images/logos/grunt_logo.png"
@@ -44,10 +45,13 @@ function Navbar() {
             </span>
           </div>
 
-          <Mail
-            className="w-[18px] h-[18px] ml-3 cursor-pointer hidden lg:block"
+          {/* <div className="size-6 border border-black ml-3 flex items-center justify-center rounded-md"> */}
+          {/* <Terminal
+            className="w-5 h-5 cursor-pointer"
             strokeWidth={2}
-          />
+          /> */}
+          <TerminalDrawer />
+          {/* </div>  */}
           <Bell
             className="w-[18px] h-[18px] cursor-pointer hidden lg:block"
             strokeWidth={2}

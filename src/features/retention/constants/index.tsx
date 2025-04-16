@@ -22,6 +22,8 @@ export type Patient = {
   dueDate: string;
   nextSteps: string;
   assignedTo: string;
+  status: "active" | "inactive";
+  recallSpend: string;
 };
 
 // Sample data
@@ -36,6 +38,8 @@ export const data: Patient[] = [
     dueDate: "Feb 15, 2025",
     nextSteps: "Your AI assistant will contact patient tomorrow for recall.",
     assignedTo: "Dr. Smith",
+    status: "inactive",
+    recallSpend: "$8651.00",
   },
   {
     id: "2",
@@ -47,6 +51,8 @@ export const data: Patient[] = [
     dueDate: "Mar 10, 2025",
     nextSteps: "Follow-up call scheduled for next week.",
     assignedTo: "Dr. Johnson",
+    status: "active",
+    recallSpend: "$1854.00",
   },
   {
     id: "3",
@@ -58,6 +64,8 @@ export const data: Patient[] = [
     dueDate: "Jan 20, 2025",
     nextSteps: "Reminder email will be sent in 2 days.",
     assignedTo: "Dr. Williams",
+    status: "active",
+    recallSpend: "$1234.00",
   },
   {
     id: "4",
@@ -69,6 +77,8 @@ export const data: Patient[] = [
     dueDate: "Feb 5, 2025",
     nextSteps: "Schedule next appointment for braces fitting.",
     assignedTo: "Dr. Brown",
+    status: "inactive",
+    recallSpend: "$1234.00",
   },
   {
     id: "5",
@@ -80,6 +90,8 @@ export const data: Patient[] = [
     dueDate: "Dec 28, 2024",
     nextSteps: "Confirm pain management plan for post-op recovery.",
     assignedTo: "Dr. Adams",
+    status: "active",
+    recallSpend: "$5434.00",
   },
 ];
 
@@ -112,62 +124,18 @@ export const columns: ColumnDef<Patient>[] = [
     },
   },
   {
-    accessorKey: "serviceType",
-    header: "Service Type",
-  },
-  {
-    accessorKey: "dueDate",
-    header: ({ column }) => {
-      return <p> Due Date</p>;
-    },
-  },
-  {
-    accessorKey: "nextSteps",
-    header: "Next Steps",
-    cell: ({ row }) => (
-      <div className="max-w-[200px]">{row.original.nextSteps}</div>
-    ),
-  },
-  {
     accessorKey: "assignedTo",
     header: "Assigned To",
   },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row, table }) => {
-      const handleOpenPatientChart =
-        table?.options?.meta?.handleOpenPatientChart;
-      const handleOpenEditAIOpened =
-        table?.options?.meta?.handleOpenEditAIOpened;
-      const handleStartProcess = table?.options?.meta?.handleStartProcess;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon">
-              <MoreHorizontal className="h-5 w-5" />
-              <span className="sr-only">Open menu</span>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => handleStartProcess(row.original.id)}
-            >
-              Start Process
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={handleOpenEditAIOpened}>
-              Edit Instructions
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleOpenPatientChart}>
-              View Patient Chart
-            </DropdownMenuItem>
-            <DropdownMenuItem>Remove Patient</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+  {
+    accessorKey: "assstatusignedTo",
+    header: "Status",
+    cell: ({ row }) => <div className="text-[#6B7280] text-sm">{row.original.status}</div>,
+  },
+  {
+    accessorKey: "recallSpend",
+    header: "Recall Spend",
+    cell: ({ row }) => <div className="text-[#6B7280] text-lg">{row.original.recallSpend}</div>,
   },
 ];

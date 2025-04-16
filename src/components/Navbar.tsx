@@ -19,7 +19,7 @@ function Navbar() {
           alt="grunt logo"
           width={120}
           height={30}
-          // className="pl-5"
+        // className="pl-5"
         />
         <div className="border border-[#E4E4E7] pl-7 relative rounded-3xl overflow-hidden w-[384px] max-w-sm hidden lg:block">
           <Input
@@ -50,7 +50,6 @@ function Navbar() {
             className="w-5 h-5 cursor-pointer"
             strokeWidth={2}
           /> */}
-          <TerminalDrawer />
           {/* </div>  */}
           <Bell
             className="w-[18px] h-[18px] cursor-pointer hidden lg:block"

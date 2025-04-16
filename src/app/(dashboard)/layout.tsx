@@ -2,6 +2,8 @@
 
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
+import { ToastProvider } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -9,6 +11,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   const [isOpened, setIsOpened] = React.useState(false);
   return (
     <div className="min-h-svh flex">
+      <Toaster />
       <Sidebar isOpened={isOpened} handleOpenState={setIsOpened} />
       <Navbar />
       <div

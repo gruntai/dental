@@ -28,7 +28,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { ManageServicesDialog } from "./ManageServices";
+
 import { PatientChartDialog } from "./PatientChartDialog";
 import { EditAIInstructionsDialog } from "./EditAIInstructionsDialog";
 import { PatientLoading } from "./ProcessLoading";
@@ -72,7 +72,7 @@ export function PatientRetentionTable() {
   return (
     <>
       <div className="flex flex-col space-y-6">
-        <div className="flex flex-col sm:flex-row justify-between gap-4">
+        {/* <div className="flex flex-col sm:flex-row justify-between gap-4">
           <div className="flex flex-1 flex-col sm:flex-row sm:items-center gap-5">
             <Input
               placeholder="Search patients..."
@@ -95,7 +95,7 @@ export function PatientRetentionTable() {
           <div className="flex items-center gap-4">
             <ManageServicesDialog />
           </div>
-        </div>
+        </div> */}
 
         <div className="rounded-md border">
           <Table className="w-[1200px] xl:w-full">

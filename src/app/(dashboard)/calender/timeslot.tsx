@@ -6,7 +6,6 @@ function TimeSlot(props, step, day, isRender) {
   const differenceMs = +moment() - +moment(props.value);
   const isCurrentTimeSlot =
     differenceMs / (60 * 1000) > 0 && differenceMs / (60 * 1000) < step;
-  console.log(isCurrentTimeSlot, differenceMs);
 
   let timeIndicator = {};
   let addStyle = {};

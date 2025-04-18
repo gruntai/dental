@@ -118,7 +118,6 @@ export function PatientRetentionTable() {
             <TableBody>
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => {
-                  console.log(row.original.name, row.original.id);
                   return (
                     <React.Fragment key={row.id}>
                       <TableRow

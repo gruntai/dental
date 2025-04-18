@@ -34,7 +34,7 @@ function formatTimestamp(totalSeconds: number): string {
 }
 
 // Flatten the steps and messages into a single array with calculated delays
-function calculateDelays(steps: ProcessStep[]): { message: string; delay: number; indent?: boolean }[] {
+function calculateDelays(steps: ProcessStep[]): { message: string; delay: number; indent?: boolean; timestamp: string }[] {
   const result = []
 
   for (let stepIndex = 0; stepIndex < steps.length; stepIndex++) {
@@ -47,6 +47,7 @@ function calculateDelays(steps: ProcessStep[]): { message: string; delay: number
         message: step.messages[i].message,
         delay: 800, // Use a fixed delay for all messages to ensure consistent progression
         indent: step.messages[i].indent,
+        timestamp: step.messages[i].timestamp,
       })
     }
   }
@@ -218,9 +219,22 @@ const TerminalDrawer = forwardRef<{ openTerminal: () => void }, TerminalDrawerPr
 
         // Schedule next message or complete process
         if (currentMessageIndex < PROCESS_MESSAGES.length - 1) {
-          // Use a fixed small delay if the calculated delay is too large
-          const nextDelay = Math.min(currentMessage.delay || 1000, 2000) 
-          console.log(`Scheduling next message with delay: ${nextDelay}ms`)
+          // Helper to parse [hh:mm:ss] timestamp to ms
+          const timestampToMs = (ts: string) => {
+            const match = ts.match(/\[(\d{2}):(\d{2}):(\d{2})\]/);
+            if (!match) return 0;
+            const [, h, m, s] = match;
+            return (parseInt(h) * 3600 + parseInt(m) * 60 + parseInt(s)) * 1000;
+          }
+
+          let nextDelay = 1000;
+          if (currentMessageIndex < PROCESS_MESSAGES.length - 1) {
+            const currentTs = PROCESS_MESSAGES[currentMessageIndex].timestamp;
+            const nextTs = PROCESS_MESSAGES[currentMessageIndex + 1].timestamp;
+            if (currentTs && nextTs) {
+              nextDelay = Math.max(timestampToMs(nextTs) - timestampToMs(currentTs), 500);
+            }
+          }
           
           timeoutRef.current = setTimeout(() => {
             setCurrentMessageIndex((prev) => prev + 1)

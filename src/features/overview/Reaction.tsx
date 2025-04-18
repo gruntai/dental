@@ -194,11 +194,11 @@ export default function Reaction() {
                 </div>
 
                 {/* Save button */}
-                <div className="pt-4">
+                {/* <div className="pt-4">
                     <Button onClick={goToDashboard} className="w-full">
                         Save Settings
                     </Button>
-                </div>
+                </div> */}
             </CardContent>
         </Card>
     )

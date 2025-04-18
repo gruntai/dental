@@ -66,8 +66,6 @@ function PotentialToShow({ data }: { data: any }) {
     const secs = seconds % 60;
     return `${minutes}:${secs.toString().padStart(2, "0")}`;
   };
-  console.log("workflow is goning on...", showWorkflow);
-  console.log("workflow is confirmed?", isConfirmed);
 
   return (
     <div

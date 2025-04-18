@@ -124,7 +124,7 @@ function Wizrd() {
         <div className="flex flex-wrap">
           {companies.map((bank) => (
             <Link
-              href={"/calender"}
+              href={"/calendar"}
               className="p-1 w-1/2 md:w-1/3 lg:w-1/4"
               key={bank.name}
             >
@@ -158,14 +158,14 @@ function Wizrd() {
       <div className="flex flex-col gap-5 2xl:gap-12">
         <p className="text-center">
           Provider not listed?{" "}
-          <Link href="/calender" className="underline">
+          <Link href="/calendar" className="underline">
             Add Custom
           </Link>
         </p>
 
         <div className="pt-5 border-t">
           <Button type="submit" className="w-full rounded-full h-12" asChild>
-            <Link href="/calender">Continue</Link>
+            <Link href="/calendar">Continue</Link>
           </Button>
         </div>
       </div>

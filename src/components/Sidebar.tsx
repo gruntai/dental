@@ -55,7 +55,7 @@ const menuItems = [
   {
     icon: "Image-2.svg",
     label: "View Calendar",
-    link: "/calender",
+    link: "/calendar",
     width: 16,
     height: 16,
   },

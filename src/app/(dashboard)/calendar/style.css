@@ -124,7 +124,7 @@
   border-radius: 100%;
   background: #ff6633;
 }
-/* scrollbar for calender */
+/* scrollbar for calendar */
 .rbc-time-content {
   scrollbar-width: none; /* For Firefox */
   -ms-overflow-style: none; /* For Internet Explorer and Edge */

@@ -632,7 +632,7 @@ const MyCalendar = ({ hasNoShows }: { hasNoShows?: boolean }) => {
   return (
     <Provider>
       <div className="myCustomHeight w-full px-5 pb-10 space-y-12">
-        <FilterUi title="Filter Calender By" cards={filterCards} />
+        <FilterUi title="Filter calendar By" cards={filterCards} />
         <Calendar<MyEvent>
           onView={handleViewChange}
           view={currentView}

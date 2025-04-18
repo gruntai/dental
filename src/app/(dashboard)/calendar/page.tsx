@@ -1,8 +1,8 @@
 import MyCalendar from "@/features/overview/Calender/MyCalender";
 import React from "react";
 
-function Calender() {
+function calendar() {
   return <MyCalendar />;
 }
 
-export default Calender;
+export default calendar;

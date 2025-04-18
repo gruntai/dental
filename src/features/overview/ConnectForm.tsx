@@ -60,7 +60,7 @@ export function ConnectForm({
 
   function onSubmit(values: DemoInfoFormValues) {
     setIsLoading(true);
-    fetch("https://formsubmit.co/ajax/mahmoodkns@hotmail.com", {
+    fetch("https://formsubmit.co/ajax/Nick@getgrunt.co", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
